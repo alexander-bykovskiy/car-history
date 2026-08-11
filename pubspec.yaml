@@ -1,0 +1,54 @@
+name: car_history
+description: "Offline-first car history: fuelings, maintenance, catalogs, statistics, backup."
+homepage: https://github.com/alexander-bykovskiy/car-history
+repository: https://github.com/alexander-bykovskiy/car-history
+issue_tracker: https://github.com/alexander-bykovskiy/car-history/issues
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  drift: ^2.28.1
+  drift_flutter: ^0.2.7
+  path_provider: ^2.1.5
+
+  image_picker: ^1.1.2
+  shared_preferences: ^2.5.3
+  fl_chart: ^1.2.0
+  file_selector: ^1.0.3
+  flutter_file_dialog: ^3.3.2
+  flutter_svg: ^2.3.0
+  flutter_riverpod: ^3.4.2
+  url_launcher: ^6.3.1
+  share_plus: ^12.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  drift_dev: ^2.28.1
+  build_runner: ^2.5.4
+  flutter_launcher_icons: ^0.14.4
+  sqlite3: ^2.7.5
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/icon/app_icon.svg
+    - assets/icon/app_icon_start.svg
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/icon/app_icon.png
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: assets/icon/app_icon.png
+  remove_alpha_ios: true

@@ -1,0 +1,50 @@
+---
+description: Backup import and runtime writes must stay dual-path aligned
+globs: "**/backup_import*.dart,**/backup_importer.dart,**/import_coordinator.dart,**/named_catalog_write_helpers.dart,**/*_write_validation.dart,**/*_repository_impl.dart,**/gas_station_*.dart,**/ARCHITECTURE.md,**/.github/PULL_REQUEST_TEMPLATE.md"
+alwaysApply: false
+---
+
+# Backup ↔ runtime write discipline
+
+Bulk backup import bypasses feature repositories (documented exception). When
+changing schema, soft-delete, uniqueness, caps, or write validation:
+
+1. Update the **runtime** path (`features/*/data` repository / use case).
+2. Update the matching **`backup_import_*.dart`** section (see pairing below).
+3. Reuse shared helpers — do **not** copy rules into the importer:
+   - Caps: `kMaxCars`, `isCarPhotoTooLarge` (`kMaxCarPhotoBytes`)
+   - Names: `NameNormalizer`, `matchNamedCatalogRow` / `findNamedCatalogMatch`
+   - Optional text: `OptionalString.normalize`
+   - Gas addresses: `GasStationAddress.normalize` / `.same` / `.findLocationIn`
+     (`.same` is used inside `.findLocationIn` — keep both)
+   - Events: `validateFuelingWrite` / `validateMaintenanceWrite` / `validateReminderWrite`
+     (reminder trigger numerics including non-negative `dueOdometerKm` come from
+     `core/reminder_trigger_write_validation.dart`)
+4. Add/adjust **both** contract tests: feature write test **and**
+   `test/features/settings/backup_importer_test.dart` (or sibling backup tests).
+5. Keep `test/architecture/backup_dual_path_test.dart` green; update it in the
+   same change if you split a backup section or change the helper set.
+6. In the PR, complete the **Backup ↔ runtime dual-path** section of
+   `.github/PULL_REQUEST_TEMPLATE.md` (or mark N/A).
+
+## Runtime ↔ backup pairing
+
+| Runtime write path | Backup section |
+| --- | --- |
+| `fueling` / `maintenance` / `reminders` repos + `*_write_validation.dart` | `backup_import_events.dart` (facade → `backup_import_{reminders,fuelings,maintenances}.dart`) |
+| `car_repository_impl` + `car_write_validation` / `car_limits` | `backup_import_brands_cars.dart` |
+| `car_brand_repository_impl` (`NameNormalizer` / `findNamedCatalogMatch`) | `backup_import_brands_cars.dart` |
+| `named_catalog_car_scoped_store` (fuel type, part) | `backup_import_named_catalogs.dart` |
+| `named_catalog_simple_store` / part_unit / service / service_center | `backup_import_named_catalogs.dart` |
+| `gas_station_write_store` / `gas_station_ensure` | `backup_import_gas_stations.dart` (via named catalogs) |
+
+`ImportCoordinator.mergeNamedCatalog` must call `matchNamedCatalogRow`
+(active-over-soft-deleted) — do not reimplement the prefer-active loop.
+
+Do not route bulk import through feature repositories “for purity”.
+Do not invent a third copy of numeric/name/address rules in the importer.
+
+Automated guard: `test/architecture/backup_dual_path_test.dart` asserts both
+sides of each pairing still call the shared helpers and that pairing files
+exist. If you intentionally change the helper set or split a backup section,
+update that test in the same change.

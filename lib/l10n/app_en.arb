@@ -1,0 +1,1030 @@
+{
+  "@@locale": "en",
+  "appTitle": "Car History",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "navData": "Data",
+  "@navData": {
+    "description": "Navigation bar label for the data tab"
+  },
+  "navStatistics": "Statistics",
+  "@navStatistics": {
+    "description": "Navigation bar label for the statistics tab"
+  },
+  "navSettings": "Settings",
+  "@navSettings": {
+    "description": "Navigation bar label for the settings tab"
+  },
+  "tabAll": "All",
+  "@tabAll": {
+    "description": "Tab label for the combined all-records section on Data and Statistics"
+  },
+  "tabFuelings": "Fuelings",
+  "@tabFuelings": {
+    "description": "Tab label for fuelings section on Data and Statistics"
+  },
+  "tabMaintenance": "Maintenance",
+  "@tabMaintenance": {
+    "description": "Tab label for maintenance section on Data and Statistics"
+  },
+  "settingsCars": "Cars",
+  "@settingsCars": {
+    "description": "Settings list item for cars"
+  },
+  "settingsFuel": "Fuel",
+  "@settingsFuel": {
+    "description": "Settings list item for fuel"
+  },
+  "settingsParts": "Parts",
+  "@settingsParts": {
+    "description": "Settings list item for parts"
+  },
+  "settingsServices": "Services",
+  "@settingsServices": {
+    "description": "Settings list item for services"
+  },
+  "settingsServiceCenters": "Service centers",
+  "@settingsServiceCenters": {
+    "description": "Settings list item for service centers"
+  },
+  "settingsGasStations": "Gas station chains",
+  "@settingsGasStations": {
+    "description": "Settings list item for gas station chains"
+  },
+  "settingsReminders": "Reminders",
+  "@settingsReminders": {
+    "description": "Settings list item for reminders"
+  },
+  "settingsUnits": "Units of measurement",
+  "@settingsUnits": {
+    "description": "Settings list item for units of measurement"
+  },
+  "settingsPartUnits": "Part units",
+  "@settingsPartUnits": {
+    "description": "Settings list item for part units of measure"
+  },
+  "settingsCurrency": "Currency",
+  "@settingsCurrency": {
+    "description": "Settings list item for currency"
+  },
+  "settingsSectionVehicle": "Vehicle",
+  "@settingsSectionVehicle": {
+    "description": "Settings section header for vehicle-related items"
+  },
+  "settingsSectionFuel": "Fuel",
+  "@settingsSectionFuel": {
+    "description": "Settings section header for fuel-related items"
+  },
+  "settingsSectionService": "Service",
+  "@settingsSectionService": {
+    "description": "Settings section header for service and parts items"
+  },
+  "settingsSectionSystem": "System",
+  "@settingsSectionSystem": {
+    "description": "Settings section header for system items"
+  },
+  "fuelTypesTitle": "Fuel types",
+  "@fuelTypesTitle": {
+    "description": "Title of the fuel types settings screen"
+  },
+  "fuelTypePetrol95": "Petrol 95",
+  "@fuelTypePetrol95": {
+    "description": "Seed label for petrol 95"
+  },
+  "fuelTypePetrol100": "Petrol 100",
+  "@fuelTypePetrol100": {
+    "description": "Seed label for petrol 100"
+  },
+  "fuelTypeDiesel": "Diesel",
+  "@fuelTypeDiesel": {
+    "description": "Seed label for diesel"
+  },
+  "actionAdd": "Add",
+  "@actionAdd": {
+    "description": "Generic add action"
+  },
+  "actionSave": "Save",
+  "@actionSave": {
+    "description": "Generic save action"
+  },
+  "actionCancel": "Cancel",
+  "@actionCancel": {
+    "description": "Generic cancel action"
+  },
+  "actionDelete": "Delete",
+  "@actionDelete": {
+    "description": "Generic delete action"
+  },
+  "actionRestore": "Restore",
+  "@actionRestore": {
+    "description": "Restore a soft-deleted item"
+  },
+  "actionEdit": "Edit",
+  "@actionEdit": {
+    "description": "Generic edit action"
+  },
+  "actionDefault": "Default",
+  "@actionDefault": {
+    "description": "Tooltip for the current default item"
+  },
+  "actionSetDefault": "Set as default",
+  "@actionSetDefault": {
+    "description": "Action to mark an item as default"
+  },
+  "fuelTypeNameLabel": "Name",
+  "@fuelTypeNameLabel": {
+    "description": "Label for fuel type name field"
+  },
+  "fuelTypeAddTitle": "Add fuel type",
+  "@fuelTypeAddTitle": {
+    "description": "Dialog title when adding a fuel type"
+  },
+  "fuelTypeEditTitle": "Edit fuel type",
+  "@fuelTypeEditTitle": {
+    "description": "Dialog title when editing a fuel type"
+  },
+  "fuelTypeDeleteConfirm": "Are you sure you want to delete this item?",
+  "@fuelTypeDeleteConfirm": {
+    "description": "Confirmation message before deleting a fuel type"
+  },
+  "fuelTypeRestoreConfirm": "This item was marked as deleted. Restore it?",
+  "@fuelTypeRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted fuel type"
+  },
+  "fuelTypeAlreadyExists": "An item with this name already exists",
+  "@fuelTypeAlreadyExists": {
+    "description": "Error when fuel type name is not unique"
+  },
+  "fuelTypeNameRequired": "Enter a name",
+  "@fuelTypeNameRequired": {
+    "description": "Validation error when fuel type name is empty"
+  },
+  "listEmpty": "The list is empty",
+  "@listEmpty": {
+    "description": "Shown when a settings list has no items"
+  },
+  "listLoadError": "Could not load the list",
+  "@listLoadError": {
+    "description": "Shown when a list stream or page load fails"
+  },
+  "carsTitle": "Cars",
+  "@carsTitle": {
+    "description": "Title of the cars settings screen"
+  },
+  "carAddTitle": "Add car",
+  "@carAddTitle": {
+    "description": "Title when creating a car"
+  },
+  "carEditTitle": "Edit car",
+  "@carEditTitle": {
+    "description": "Title when editing a car"
+  },
+  "carBrandLabel": "Brand",
+  "@carBrandLabel": {
+    "description": "Car brand field label"
+  },
+  "carDefaultLabel": "Default auto",
+  "@carDefaultLabel": {
+    "description": "Label for default car switch on car form"
+  },
+  "carModelLabel": "Model",
+  "@carModelLabel": {
+    "description": "Car model field label"
+  },
+  "carYearLabel": "Year",
+  "@carYearLabel": {
+    "description": "Car year field label"
+  },
+  "carPhotoLabel": "Photo",
+  "@carPhotoLabel": {
+    "description": "Car photo field label"
+  },
+  "carPhotoPick": "Choose photo",
+  "@carPhotoPick": {
+    "description": "Button to pick a car photo"
+  },
+  "carPhotoPickError": "Could not open the photo picker. Fully restart the app and try again.",
+  "@carPhotoPickError": {
+    "description": "Shown when image picker fails"
+  },
+  "carPhotoRemove": "Remove photo",
+  "@carPhotoRemove": {
+    "description": "Button to remove a car photo"
+  },
+  "carColorLabel": "Color",
+  "@carColorLabel": {
+    "description": "Car color field label"
+  },
+  "carBrandRequired": "Brand is required",
+  "@carBrandRequired": {
+    "description": "Validation error when brand is empty"
+  },
+  "carYearInvalid": "Enter a valid year",
+  "@carYearInvalid": {
+    "description": "Validation error when year is not a number"
+  },
+  "carDeleteConfirm": "Are you sure you want to delete this car? All related data will be deleted.",
+  "@carDeleteConfirm": {
+    "description": "Confirmation before deleting a car"
+  },
+  "swipeDeleteTip": "Swipe left to delete a record",
+  "@swipeDeleteTip": {
+    "description": "Shared hint about swipe-to-delete on list screens"
+  },
+  "doubleTapEditTip": "Double-tap a record to edit it",
+  "@doubleTapEditTip": {
+    "description": "Shared hint about double-tap to edit history records"
+  },
+  "tipDontShowAgain": "Don't show again",
+  "@tipDontShowAgain": {
+    "description": "Dismisses a one-time UI tip permanently"
+  },
+  "seedCarBrand": "Brand",
+  "@seedCarBrand": {
+    "description": "Placeholder brand name for the seeded car"
+  },
+  "seedCarModel": "Model",
+  "@seedCarModel": {
+    "description": "Placeholder model name for the seeded car"
+  },
+  "carLimitReached": "You can add up to {max} cars",
+  "@carLimitReached": {
+    "description": "Shown when the car limit is reached",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "carDeleteLastBlocked": "You need at least one car",
+  "@carDeleteLastBlocked": {
+    "description": "Shown when trying to delete the last remaining car"
+  },
+  "fuelTypeCarsLabel": "Available for cars",
+  "@fuelTypeCarsLabel": {
+    "description": "Label above car checkboxes on fuel type form"
+  },
+  "catalogCarsRequired": "Select at least one car",
+  "@catalogCarsRequired": {
+    "description": "Validation when no cars are selected for a car-scoped catalog item"
+  },
+  "partsTitle": "Parts",
+  "@partsTitle": {
+    "description": "Title of the parts settings screen"
+  },
+  "partNameLabel": "Name",
+  "@partNameLabel": {
+    "description": "Label for part name field"
+  },
+  "partAddTitle": "Add part",
+  "@partAddTitle": {
+    "description": "Dialog title when adding a part"
+  },
+  "partEditTitle": "Edit part",
+  "@partEditTitle": {
+    "description": "Dialog title when editing a part"
+  },
+  "partDeleteConfirm": "Are you sure you want to delete this item?",
+  "@partDeleteConfirm": {
+    "description": "Confirmation before deleting a part"
+  },
+  "partRestoreConfirm": "This item was marked as deleted. Restore it?",
+  "@partRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted part"
+  },
+  "partAlreadyExists": "An item with this name already exists",
+  "@partAlreadyExists": {
+    "description": "Error when part name is not unique"
+  },
+  "partNameRequired": "Enter a name",
+  "@partNameRequired": {
+    "description": "Validation error when part name is empty"
+  },
+  "servicesTitle": "Services",
+  "@servicesTitle": {
+    "description": "Title of the service works settings screen"
+  },
+  "serviceNameLabel": "Name",
+  "@serviceNameLabel": {
+    "description": "Label for service work name field"
+  },
+  "serviceAddTitle": "Add service",
+  "@serviceAddTitle": {
+    "description": "Dialog title when adding a service work"
+  },
+  "serviceEditTitle": "Edit service",
+  "@serviceEditTitle": {
+    "description": "Dialog title when editing a service work"
+  },
+  "serviceDeleteConfirm": "Are you sure you want to delete this item?",
+  "@serviceDeleteConfirm": {
+    "description": "Confirmation before deleting a service work"
+  },
+  "serviceRestoreConfirm": "This item was marked as deleted. Restore it?",
+  "@serviceRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted service"
+  },
+  "serviceAlreadyExists": "An item with this name already exists",
+  "@serviceAlreadyExists": {
+    "description": "Error when service name is not unique"
+  },
+  "serviceNameRequired": "Enter a name",
+  "@serviceNameRequired": {
+    "description": "Validation error when service name is empty"
+  },
+  "serviceIconLabel": "Icon",
+  "@serviceIconLabel": {
+    "description": "Label for optional service icon picker"
+  },
+  "serviceCentersTitle": "Service centers",
+  "@serviceCentersTitle": {
+    "description": "Title of the service centers settings screen"
+  },
+  "serviceCenterAddTitle": "Add service center",
+  "@serviceCenterAddTitle": {
+    "description": "Dialog title when adding a service center"
+  },
+  "serviceCenterEditTitle": "Edit service center",
+  "@serviceCenterEditTitle": {
+    "description": "Dialog title when editing a service center"
+  },
+  "serviceCenterDeleteConfirm": "Are you sure you want to delete this item?",
+  "@serviceCenterDeleteConfirm": {
+    "description": "Confirmation before deleting a service center"
+  },
+  "gasStationsTitle": "Gas station chains",
+  "@gasStationsTitle": {
+    "description": "Title of the gas station chains settings screen"
+  },
+  "gasStationAddTitle": "Add chain",
+  "@gasStationAddTitle": {
+    "description": "Dialog title when adding a gas station chain"
+  },
+  "gasStationEditTitle": "Edit chain",
+  "@gasStationEditTitle": {
+    "description": "Dialog title when editing a gas station chain"
+  },
+  "gasStationAddAddressTitle": "Add address",
+  "@gasStationAddAddressTitle": {
+    "description": "Dialog title when adding a gas station address"
+  },
+  "gasStationEditAddressTitle": "Edit address",
+  "@gasStationEditAddressTitle": {
+    "description": "Dialog title when editing a gas station address"
+  },
+  "gasStationNoAddress": "Without address",
+  "@gasStationNoAddress": {
+    "description": "Label for a chain location that has no address"
+  },
+  "gasStationAddressesSection": "Addresses",
+  "@gasStationAddressesSection": {
+    "description": "Section header for addresses on the gas station detail screen"
+  },
+  "placeAddressRequired": "Enter an address",
+  "@placeAddressRequired": {
+    "description": "Validation error when gas station address is empty"
+  },
+  "gasStationLocationsCount": "{count, plural, =0{No addresses} =1{1 address} other{{count} addresses}}",
+  "@gasStationLocationsCount": {
+    "description": "Subtitle showing how many addresses a chain has",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "gasStationDeleteConfirm": "Are you sure you want to delete this item?",
+  "@gasStationDeleteConfirm": {
+    "description": "Confirmation before deleting a gas station chain or address"
+  },
+  "placeNameLabel": "Name",
+  "@placeNameLabel": {
+    "description": "Label for place name field"
+  },
+  "placeAddressLabel": "Address",
+  "@placeAddressLabel": {
+    "description": "Label for optional place address field"
+  },
+  "placeNameRequired": "Enter a name",
+  "@placeNameRequired": {
+    "description": "Validation error when place name is empty"
+  },
+  "placeAlreadyExists": "An item with this name already exists",
+  "@placeAlreadyExists": {
+    "description": "Error when place name is not unique"
+  },
+  "placeRestoreConfirm": "This item was marked as deleted. Restore it?",
+  "@placeRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted place"
+  },
+  "unitsFuelSection": "Fuel volume",
+  "@unitsFuelSection": {
+    "description": "Section title for fuel volume units"
+  },
+  "unitsDistanceSection": "Distance",
+  "@unitsDistanceSection": {
+    "description": "Section title for distance units"
+  },
+  "unitLiters": "Liters",
+  "@unitLiters": {
+    "description": "Fuel volume unit: liters"
+  },
+  "unitUsGallons": "US gallons",
+  "@unitUsGallons": {
+    "description": "Fuel volume unit: US gallons"
+  },
+  "unitImperialGallons": "Imperial gallons",
+  "@unitImperialGallons": {
+    "description": "Fuel volume unit: imperial gallons"
+  },
+  "unitKilometers": "Kilometers",
+  "@unitKilometers": {
+    "description": "Distance unit: kilometers"
+  },
+  "unitMiles": "Miles",
+  "@unitMiles": {
+    "description": "Distance unit: miles"
+  },
+  "fuelingAddTitle": "Add fueling",
+  "@fuelingAddTitle": {
+    "description": "Dialog title when adding a fueling"
+  },
+  "fuelingEditTitle": "Edit fueling",
+  "@fuelingEditTitle": {
+    "description": "Dialog title when editing a fueling"
+  },
+  "fuelingDeleteConfirm": "Are you sure you want to delete this fueling?",
+  "@fuelingDeleteConfirm": {
+    "description": "Confirmation when deleting a fueling record"
+  },
+  "fuelingDateLabel": "Date",
+  "@fuelingDateLabel": {
+    "description": "Label for fueling date field"
+  },
+  "fuelingPriceLabel": "Price per {unit}",
+  "@fuelingPriceLabel": {
+    "description": "Label for price per volume unit field",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingQuantityLabel": "Quantity ({unit})",
+  "@fuelingQuantityLabel": {
+    "description": "Label for fuel quantity field",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingTotalLabel": "Total",
+  "@fuelingTotalLabel": {
+    "description": "Label for total amount field"
+  },
+  "fuelingPriceRequired": "Enter price",
+  "@fuelingPriceRequired": {
+    "description": "Validation when price is missing or invalid"
+  },
+  "fuelingQuantityRequired": "Enter quantity",
+  "@fuelingQuantityRequired": {
+    "description": "Validation when quantity is missing or invalid"
+  },
+  "fuelingQuantityOrTotalRequired": "Enter quantity or total",
+  "@fuelingQuantityOrTotalRequired": {
+    "description": "Validation when neither quantity nor total is provided"
+  },
+  "fuelingTotalRequired": "Enter total amount",
+  "@fuelingTotalRequired": {
+    "description": "Validation when total amount is missing or invalid"
+  },
+  "fuelingOdometerLabel": "Odometer ({unit})",
+  "@fuelingOdometerLabel": {
+    "description": "Optional odometer field label",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingOdometerInvalid": "Enter a valid odometer reading",
+  "@fuelingOdometerInvalid": {
+    "description": "Validation when odometer value is invalid"
+  },
+  "fuelingOdometerSequenceTitle": "Unusual odometer value",
+  "@fuelingOdometerSequenceTitle": {
+    "description": "Title when odometer breaks chronological order vs neighbors"
+  },
+  "fuelingOdometerLowerTitle": "Odometer lower than earlier",
+  "@fuelingOdometerLowerTitle": {
+    "description": "Title when odometer is lower than an earlier fueling"
+  },
+  "fuelingOdometerLowerMessage": "The odometer is lower than an earlier reading ({value} {unit}).",
+  "@fuelingOdometerLowerMessage": {
+    "description": "Warning when odometer is lower than an earlier fueling",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingOdometerHigherTitle": "Odometer higher than later",
+  "@fuelingOdometerHigherTitle": {
+    "description": "Title when odometer is higher than a later fueling"
+  },
+  "fuelingOdometerHigherMessage": "The odometer is higher than a later reading ({value} {unit}).",
+  "@fuelingOdometerHigherMessage": {
+    "description": "Warning when odometer is higher than a later fueling",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingOdometerWarningFooter": "This may distort fuel economy and other statistics. Save anyway?",
+  "@fuelingOdometerWarningFooter": {
+    "description": "Shared footer asking to confirm saving despite odometer warning"
+  },
+  "actionContinue": "Continue",
+  "@actionContinue": {
+    "description": "Confirm action to continue despite a warning"
+  },
+  "fuelingListSubtitle": "{quantity} {unit} · {price} / {unit}",
+  "@fuelingListSubtitle": {
+    "description": "Subtitle for a fueling list item",
+    "placeholders": {
+      "quantity": {
+        "type": "String"
+      },
+      "price": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "unitFuelShortLiter": "L",
+  "@unitFuelShortLiter": {
+    "description": "Short label for liters"
+  },
+  "unitFuelShortUsGallon": "US gal",
+  "@unitFuelShortUsGallon": {
+    "description": "Short label for US gallons"
+  },
+  "unitFuelShortImperialGallon": "Imp gal",
+  "@unitFuelShortImperialGallon": {
+    "description": "Short label for imperial gallons"
+  },
+  "unitDistanceShortKm": "km",
+  "@unitDistanceShortKm": {
+    "description": "Short label for kilometers"
+  },
+  "unitDistanceShortMile": "mi",
+  "@unitDistanceShortMile": {
+    "description": "Short label for miles"
+  },
+  "currencyCodeLabel": "Currency code",
+  "@currencyCodeLabel": {
+    "description": "Label for currency code text field"
+  },
+  "currencyCodeHint": "EUR",
+  "@currencyCodeHint": {
+    "description": "Hint example for currency code"
+  },
+  "currencyCodeHelp": "Three Latin letters, e.g. USD, EUR, RSD",
+  "@currencyCodeHelp": {
+    "description": "Help text under currency code field"
+  },
+  "currencyCodeInvalid": "Enter exactly 3 Latin letters",
+  "@currencyCodeInvalid": {
+    "description": "Validation when currency code is invalid"
+  },
+  "currenciesEditTitle": "Currencies",
+  "@currenciesEditTitle": {
+    "description": "App bar title for currencies list editor"
+  },
+  "currencyAddTitle": "Add currency",
+  "@currencyAddTitle": {
+    "description": "Dialog title when adding a currency code"
+  },
+  "currencyEditTitle": "Edit currency",
+  "@currencyEditTitle": {
+    "description": "Dialog title when editing a currency code"
+  },
+  "currencyDeleteConfirm": "Are you sure you want to delete this currency?",
+  "@currencyDeleteConfirm": {
+    "description": "Confirm dialog when deleting a currency from the list"
+  },
+  "currencyAlreadyExists": "This currency is already in the list",
+  "@currencyAlreadyExists": {
+    "description": "Validation when adding a duplicate currency code"
+  },
+  "currencyCannotDeleteLast": "Keep at least one currency",
+  "@currencyCannotDeleteLast": {
+    "description": "Shown when trying to remove the last currency"
+  },
+  "fuelingFuelTypeLabel": "Fuel type",
+  "@fuelingFuelTypeLabel": {
+    "description": "Label for fuel type field on fueling form"
+  },
+  "fuelingFuelTypeRequired": "Select or enter a fuel type",
+  "@fuelingFuelTypeRequired": {
+    "description": "Validation when fuel type is empty on fueling form"
+  },
+  "fuelingGasStationLabel": "Gas station",
+  "@fuelingGasStationLabel": {
+    "description": "Optional gas station field on fueling form"
+  },
+  "fuelingGasStationEnsureFailed": "Could not save the gas station",
+  "@fuelingGasStationEnsureFailed": {
+    "description": "Error when gas station ensure fails while saving a fueling"
+  },
+  "maintenanceAddTitle": "Add maintenance",
+  "@maintenanceAddTitle": {
+    "description": "Dialog title when adding a maintenance record"
+  },
+  "maintenanceEditTitle": "Edit maintenance",
+  "@maintenanceEditTitle": {
+    "description": "Dialog title when editing a maintenance record"
+  },
+  "maintenanceDeleteConfirm": "Are you sure you want to delete this maintenance record?",
+  "@maintenanceDeleteConfirm": {
+    "description": "Confirmation when deleting a maintenance record"
+  },
+  "maintenanceDateLabel": "Date",
+  "@maintenanceDateLabel": {
+    "description": "Label for maintenance date field"
+  },
+  "maintenanceServiceLabel": "Service",
+  "@maintenanceServiceLabel": {
+    "description": "Label for service field on maintenance form"
+  },
+  "maintenanceServiceRequired": "Select or enter a service",
+  "@maintenanceServiceRequired": {
+    "description": "Validation when service is empty on maintenance form"
+  },
+  "maintenanceTotalLabel": "Service cost",
+  "@maintenanceTotalLabel": {
+    "description": "Label for optional service cost field on maintenance form"
+  },
+  "maintenanceTotalInvalid": "Enter a valid service cost",
+  "@maintenanceTotalInvalid": {
+    "description": "Validation when service cost is non-empty but invalid"
+  },
+  "maintenanceOdometerWarningFooter": "This may distort statistics. Save anyway?",
+  "@maintenanceOdometerWarningFooter": {
+    "description": "Footer asking to confirm saving despite odometer warning on maintenance"
+  },
+  "maintenancePartsSection": "Parts",
+  "@maintenancePartsSection": {
+    "description": "Section title for parts list on maintenance form"
+  },
+  "maintenancePartAddTitle": "Add part",
+  "@maintenancePartAddTitle": {
+    "description": "Dialog title when adding a part line on maintenance form"
+  },
+  "maintenancePartEditTitle": "Edit part",
+  "@maintenancePartEditTitle": {
+    "description": "Dialog title when editing a part line on maintenance form"
+  },
+  "maintenancePartNameLabel": "Part",
+  "@maintenancePartNameLabel": {
+    "description": "Label for part name field on maintenance part dialog"
+  },
+  "maintenancePartNameRequired": "Select or enter a part",
+  "@maintenancePartNameRequired": {
+    "description": "Validation when part name is empty on maintenance part dialog"
+  },
+  "maintenancePartAmountLabel": "Price",
+  "@maintenancePartAmountLabel": {
+    "description": "Label for optional unit price on maintenance part dialog"
+  },
+  "maintenancePartAmountInvalid": "Enter a valid price",
+  "@maintenancePartAmountInvalid": {
+    "description": "Validation when part price is non-empty but invalid"
+  },
+  "maintenancePartQuantityLabel": "Quantity",
+  "@maintenancePartQuantityLabel": {
+    "description": "Label for quantity on maintenance part dialog"
+  },
+  "maintenancePartQuantityInvalid": "Enter a valid quantity",
+  "@maintenancePartQuantityInvalid": {
+    "description": "Validation when quantity is empty or invalid"
+  },
+  "maintenancePartUnitLabel": "Unit",
+  "@maintenancePartUnitLabel": {
+    "description": "Label for unit of measure on maintenance part dialog"
+  },
+  "maintenancePartCommentLabel": "Comment",
+  "@maintenancePartCommentLabel": {
+    "description": "Optional comment for a maintenance part line"
+  },
+  "maintenancePartDeleteConfirm": "Remove this part from the list?",
+  "@maintenancePartDeleteConfirm": {
+    "description": "Confirmation when swiping to remove a part line on maintenance form"
+  },
+  "maintenanceGrandTotalLabel": "Amount",
+  "@maintenanceGrandTotalLabel": {
+    "description": "Label before grand total on maintenance form"
+  },
+  "partUnitsTitle": "Part units",
+  "@partUnitsTitle": {
+    "description": "Title of the part units settings screen"
+  },
+  "partUnitNameLabel": "Name",
+  "@partUnitNameLabel": {
+    "description": "Label for part unit name field"
+  },
+  "partUnitAddTitle": "Add unit",
+  "@partUnitAddTitle": {
+    "description": "Dialog title when adding a part unit"
+  },
+  "partUnitEditTitle": "Edit unit",
+  "@partUnitEditTitle": {
+    "description": "Dialog title when editing a part unit"
+  },
+  "partUnitDeleteConfirm": "Are you sure you want to delete this item?",
+  "@partUnitDeleteConfirm": {
+    "description": "Confirmation before deleting a part unit"
+  },
+  "partUnitRestoreConfirm": "This item was marked as deleted. Restore it?",
+  "@partUnitRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted part unit"
+  },
+  "partUnitAlreadyExists": "An item with this name already exists",
+  "@partUnitAlreadyExists": {
+    "description": "Error when part unit name is not unique"
+  },
+  "partUnitNameRequired": "Enter a name",
+  "@partUnitNameRequired": {
+    "description": "Validation error when part unit name is empty"
+  },
+  "partUnitLiters": "Liters",
+  "@partUnitLiters": {
+    "description": "Seed name for liters part unit"
+  },
+  "partUnitPieces": "Pieces",
+  "@partUnitPieces": {
+    "description": "Seed name for pieces part unit"
+  },
+  "partUnitPackages": "Packages",
+  "@partUnitPackages": {
+    "description": "Seed name for packages part unit"
+  },
+  "statsGroupByMonths": "By months",
+  "@statsGroupByMonths": {
+    "description": "Statistics chart grouping: one bar per month"
+  },
+  "statsGroupByYears": "By years",
+  "@statsGroupByYears": {
+    "description": "Statistics chart grouping: one bar per year"
+  },
+  "statsPeriodYear": "Year",
+  "@statsPeriodYear": {
+    "description": "Label for year period selector on statistics"
+  },
+  "statsLegendFuel": "Fuel",
+  "@statsLegendFuel": {
+    "description": "Chart legend label for fuel expenses"
+  },
+  "statsLegendMaintenance": "Maintenance",
+  "@statsLegendMaintenance": {
+    "description": "Chart legend label for maintenance expenses"
+  },
+  "statsTotal": "Total",
+  "@statsTotal": {
+    "description": "Label for total expenses in the selected period"
+  },
+  "statsFuelDetails": "Fuel by type",
+  "@statsFuelDetails": {
+    "description": "Section title for fuel expense breakdown"
+  },
+  "statsMaintenanceDetails": "Maintenance by service",
+  "@statsMaintenanceDetails": {
+    "description": "Section title for maintenance expense breakdown"
+  },
+  "statsUnknownCategory": "Unknown",
+  "@statsUnknownCategory": {
+    "description": "Fallback name when fuel type or service is missing"
+  },
+  "statsEmpty": "No expenses for this period",
+  "@statsEmpty": {
+    "description": "Empty state when statistics have no data for the period"
+  },
+  "statsSelectedPeriod": "Selected period",
+  "@statsSelectedPeriod": {
+    "description": "Label above details for the tapped chart bar"
+  },
+  "remindersTitle": "Reminders",
+  "@remindersTitle": {
+    "description": "Title of the reminders settings screen"
+  },
+  "reminderAddTitle": "Add reminder",
+  "@reminderAddTitle": {
+    "description": "Title when creating a reminder"
+  },
+  "reminderEditTitle": "Edit reminder",
+  "@reminderEditTitle": {
+    "description": "Title when editing a reminder"
+  },
+  "reminderTitleLabel": "Title",
+  "@reminderTitleLabel": {
+    "description": "Label for reminder title field"
+  },
+  "reminderTitleRequired": "Enter a title",
+  "@reminderTitleRequired": {
+    "description": "Validation when reminder title is empty"
+  },
+  "reminderCarLabel": "Car",
+  "@reminderCarLabel": {
+    "description": "Label for car selector on reminder form"
+  },
+  "reminderCarRequired": "Select a car",
+  "@reminderCarRequired": {
+    "description": "Validation when no car is selected for a reminder"
+  },
+  "reminderByDate": "By date",
+  "@reminderByDate": {
+    "description": "Toggle to enable date-based reminder"
+  },
+  "reminderByOdometer": "By odometer",
+  "@reminderByOdometer": {
+    "description": "Toggle to enable odometer-based reminder"
+  },
+  "reminderDueDateLabel": "Due date",
+  "@reminderDueDateLabel": {
+    "description": "Label for reminder due date field"
+  },
+  "reminderDateHint": "Select a date",
+  "@reminderDateHint": {
+    "description": "Placeholder when reminder due date is not set"
+  },
+  "reminderDateRequired": "Select a due date",
+  "@reminderDateRequired": {
+    "description": "Validation when date trigger is enabled but empty"
+  },
+  "reminderOdometerRequired": "Enter a target odometer reading",
+  "@reminderOdometerRequired": {
+    "description": "Validation when odometer trigger is enabled but empty"
+  },
+  "reminderTriggerRequired": "Set a date, odometer, or both",
+  "@reminderTriggerRequired": {
+    "description": "Validation when reminder has neither date nor odometer"
+  },
+  "reminderSyncFailed": "Could not sync the linked reminder",
+  "@reminderSyncFailed": {
+    "description": "Shown when maintenance save fails while syncing its reminder"
+  },
+  "reminderRemindBeforeDaysLabel": "Remind before (days)",
+  "@reminderRemindBeforeDaysLabel": {
+    "description": "Label for days-before reminder window"
+  },
+  "reminderRemindBeforeDistanceLabel": "Remind before ({unit})",
+  "@reminderRemindBeforeDistanceLabel": {
+    "description": "Label for distance-before reminder window",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderRemindBeforeInvalid": "Enter a valid non-negative value",
+  "@reminderRemindBeforeInvalid": {
+    "description": "Validation when remind-before value is invalid"
+  },
+  "reminderRemindBeforeDays": "in {days} days",
+  "@reminderRemindBeforeDays": {
+    "description": "Subtitle fragment for remind-before days",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "reminderRemindBeforeDistance": "before {distance}",
+  "@reminderRemindBeforeDistance": {
+    "description": "Subtitle fragment for remind-before distance",
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderCompleted": "Completed",
+  "@reminderCompleted": {
+    "description": "Toggle / label for marking a reminder as done"
+  },
+  "reminderDeleteConfirm": "Are you sure you want to delete this reminder?",
+  "@reminderDeleteConfirm": {
+    "description": "Confirmation before deleting a reminder"
+  },
+  "maintenanceAddReminder": "Add reminder",
+  "@maintenanceAddReminder": {
+    "description": "Button to attach a reminder while creating/editing maintenance"
+  },
+  "maintenanceEditReminder": "Edit reminder",
+  "@maintenanceEditReminder": {
+    "description": "Title/button when a reminder is already attached to maintenance"
+  },
+  "settingsBackup": "Backup",
+  "@settingsBackup": {
+    "description": "Settings list item for export/import backup"
+  },
+  "backupDescription": "Export all settings and events to a JSON file, share the backup with another app (for example Google Drive), or import a previously exported backup. Exact duplicates are skipped on import.",
+  "@backupDescription": {
+    "description": "Explanation on the backup settings screen"
+  },
+  "backupExport": "Export to JSON",
+  "@backupExport": {
+    "description": "Button to export data to a JSON file"
+  },
+  "backupShare": "Share backup",
+  "@backupShare": {
+    "description": "Button to share backup JSON via the system share sheet"
+  },
+  "backupImport": "Import from JSON",
+  "@backupImport": {
+    "description": "Button to import data from a JSON file"
+  },
+  "backupExportSuccess": "Backup exported",
+  "@backupExportSuccess": {
+    "description": "SnackBar after successful export"
+  },
+  "backupShareSuccess": "Backup shared",
+  "@backupShareSuccess": {
+    "description": "SnackBar after the share sheet completed successfully"
+  },
+  "backupExportFailed": "Could not export backup",
+  "@backupExportFailed": {
+    "description": "SnackBar after failed export"
+  },
+  "backupImportSuccess": "Import finished: {added} added, {skipped} skipped",
+  "@backupImportSuccess": {
+    "description": "SnackBar after successful import with counts",
+    "placeholders": {
+      "added": {
+        "type": "int"
+      },
+      "skipped": {
+        "type": "int"
+      }
+    }
+  },
+  "backupImportFailed": "Could not import backup",
+  "@backupImportFailed": {
+    "description": "SnackBar when backup import fails for an unknown/IO reason"
+  },
+  "backupImportPrefsFailed": "Data imported, but preferences could not be applied",
+  "@backupImportPrefsFailed": {
+    "description": "SnackBar when DB import succeeded but SharedPreferences apply failed"
+  },
+  "backupImportEmpty": "Backup file is empty",
+  "@backupImportEmpty": {
+    "description": "SnackBar when the selected backup file has no content"
+  },
+  "backupImportInvalid": "Backup file is not valid JSON",
+  "@backupImportInvalid": {
+    "description": "SnackBar when the backup file cannot be parsed as a JSON object"
+  },
+  "backupImportUnsupportedVersion": "This backup version is not supported",
+  "@backupImportUnsupportedVersion": {
+    "description": "SnackBar when backup JSON version is missing or too new"
+  },
+  "settingsPrivacy": "Privacy policy",
+  "@settingsPrivacy": {
+    "description": "Settings list item for privacy policy"
+  },
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "Settings list item for app language"
+  },
+  "languageSystem": "System default",
+  "@languageSystem": {
+    "description": "Language option that follows the device locale"
+  },
+  "privacyOpenFailed": "Could not open the link",
+  "@privacyOpenFailed": {
+    "description": "SnackBar when url_launcher fails for privacy URL"
+  },
+  "formActionFailed": "Could not complete the action. Please try again.",
+  "@formActionFailed": {
+    "description": "SnackBar when fueling/maintenance save or delete throws unexpectedly"
+  },
+  "appStartFailed": "Could not start the app. Please reinstall or contact support.",
+  "@appStartFailed": {
+    "description": "Bootstrap failure message shown instead of raw exceptions"
+  },
+  "photoTooLarge": "Photo is too large. Choose a smaller image.",
+  "@photoTooLarge": {
+    "description": "SnackBar when car photo exceeds the size limit"
+  }
+}

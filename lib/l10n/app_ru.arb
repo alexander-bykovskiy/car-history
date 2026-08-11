@@ -1,0 +1,1030 @@
+{
+  "@@locale": "ru",
+  "appTitle": "История авто",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "navData": "Данные",
+  "@navData": {
+    "description": "Navigation bar label for the data tab"
+  },
+  "navStatistics": "Статистика",
+  "@navStatistics": {
+    "description": "Navigation bar label for the statistics tab"
+  },
+  "navSettings": "Настройки",
+  "@navSettings": {
+    "description": "Navigation bar label for the settings tab"
+  },
+  "tabAll": "Все",
+  "@tabAll": {
+    "description": "Tab label for the combined all-records section on Data and Statistics"
+  },
+  "tabFuelings": "Заправки",
+  "@tabFuelings": {
+    "description": "Tab label for fuelings section on Data and Statistics"
+  },
+  "tabMaintenance": "Обслуживание",
+  "@tabMaintenance": {
+    "description": "Tab label for maintenance section on Data and Statistics"
+  },
+  "settingsCars": "Авто",
+  "@settingsCars": {
+    "description": "Settings list item for cars"
+  },
+  "settingsFuel": "Топливо",
+  "@settingsFuel": {
+    "description": "Settings list item for fuel"
+  },
+  "settingsParts": "Запчасти",
+  "@settingsParts": {
+    "description": "Settings list item for parts"
+  },
+  "settingsServices": "Сервисы",
+  "@settingsServices": {
+    "description": "Settings list item for services"
+  },
+  "settingsServiceCenters": "Сервисные центры",
+  "@settingsServiceCenters": {
+    "description": "Settings list item for service centers"
+  },
+  "settingsGasStations": "Сети АЗС",
+  "@settingsGasStations": {
+    "description": "Settings list item for gas station chains"
+  },
+  "settingsReminders": "Напоминания",
+  "@settingsReminders": {
+    "description": "Settings list item for reminders"
+  },
+  "settingsUnits": "Единицы измерения",
+  "@settingsUnits": {
+    "description": "Settings list item for units of measurement"
+  },
+  "settingsPartUnits": "Единицы измерения запчастей",
+  "@settingsPartUnits": {
+    "description": "Settings list item for part units of measure"
+  },
+  "settingsCurrency": "Валюта",
+  "@settingsCurrency": {
+    "description": "Settings list item for currency"
+  },
+  "settingsSectionVehicle": "Автомобиль",
+  "@settingsSectionVehicle": {
+    "description": "Settings section header for vehicle-related items"
+  },
+  "settingsSectionFuel": "Топливо",
+  "@settingsSectionFuel": {
+    "description": "Settings section header for fuel-related items"
+  },
+  "settingsSectionService": "Обслуживание",
+  "@settingsSectionService": {
+    "description": "Settings section header for service and parts items"
+  },
+  "settingsSectionSystem": "Система",
+  "@settingsSectionSystem": {
+    "description": "Settings section header for system items"
+  },
+  "fuelTypesTitle": "Типы топлива",
+  "@fuelTypesTitle": {
+    "description": "Title of the fuel types settings screen"
+  },
+  "fuelTypePetrol95": "Бензин 95",
+  "@fuelTypePetrol95": {
+    "description": "Seed label for petrol 95"
+  },
+  "fuelTypePetrol100": "Бензин 100",
+  "@fuelTypePetrol100": {
+    "description": "Seed label for petrol 100"
+  },
+  "fuelTypeDiesel": "Дизель",
+  "@fuelTypeDiesel": {
+    "description": "Seed label for diesel"
+  },
+  "actionAdd": "Добавить",
+  "@actionAdd": {
+    "description": "Generic add action"
+  },
+  "actionSave": "Сохранить",
+  "@actionSave": {
+    "description": "Generic save action"
+  },
+  "actionCancel": "Отмена",
+  "@actionCancel": {
+    "description": "Generic cancel action"
+  },
+  "actionDelete": "Удалить",
+  "@actionDelete": {
+    "description": "Generic delete action"
+  },
+  "actionRestore": "Восстановить",
+  "@actionRestore": {
+    "description": "Restore a soft-deleted item"
+  },
+  "actionEdit": "Редактировать",
+  "@actionEdit": {
+    "description": "Generic edit action"
+  },
+  "actionDefault": "По умолчанию",
+  "@actionDefault": {
+    "description": "Tooltip for the current default item"
+  },
+  "actionSetDefault": "Сделать по умолчанию",
+  "@actionSetDefault": {
+    "description": "Action to mark an item as default"
+  },
+  "fuelTypeNameLabel": "Название",
+  "@fuelTypeNameLabel": {
+    "description": "Label for fuel type name field"
+  },
+  "fuelTypeAddTitle": "Добавить тип топлива",
+  "@fuelTypeAddTitle": {
+    "description": "Dialog title when adding a fuel type"
+  },
+  "fuelTypeEditTitle": "Редактировать тип топлива",
+  "@fuelTypeEditTitle": {
+    "description": "Dialog title when editing a fuel type"
+  },
+  "fuelTypeDeleteConfirm": "Вы точно хотите удалить?",
+  "@fuelTypeDeleteConfirm": {
+    "description": "Confirmation message before deleting a fuel type"
+  },
+  "fuelTypeRestoreConfirm": "Это было помечено как удалённое. Восстановить?",
+  "@fuelTypeRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted fuel type"
+  },
+  "fuelTypeAlreadyExists": "Элемент с таким именем уже существует",
+  "@fuelTypeAlreadyExists": {
+    "description": "Error when fuel type name is not unique"
+  },
+  "fuelTypeNameRequired": "Введите название",
+  "@fuelTypeNameRequired": {
+    "description": "Validation error when fuel type name is empty"
+  },
+  "listEmpty": "Список пустой",
+  "@listEmpty": {
+    "description": "Shown when a settings list has no items"
+  },
+  "listLoadError": "Не удалось загрузить список",
+  "@listLoadError": {
+    "description": "Shown when a list stream or page load fails"
+  },
+  "carsTitle": "Автомобили",
+  "@carsTitle": {
+    "description": "Title of the cars settings screen"
+  },
+  "carAddTitle": "Добавить авто",
+  "@carAddTitle": {
+    "description": "Title when creating a car"
+  },
+  "carEditTitle": "Редактировать авто",
+  "@carEditTitle": {
+    "description": "Title when editing a car"
+  },
+  "carBrandLabel": "Марка",
+  "@carBrandLabel": {
+    "description": "Car brand field label"
+  },
+  "carDefaultLabel": "Авто по умолчанию",
+  "@carDefaultLabel": {
+    "description": "Label for default car switch on car form"
+  },
+  "carModelLabel": "Модель",
+  "@carModelLabel": {
+    "description": "Car model field label"
+  },
+  "carYearLabel": "Год",
+  "@carYearLabel": {
+    "description": "Car year field label"
+  },
+  "carPhotoLabel": "Фото",
+  "@carPhotoLabel": {
+    "description": "Car photo field label"
+  },
+  "carPhotoPick": "Выбрать фото",
+  "@carPhotoPick": {
+    "description": "Button to pick a car photo"
+  },
+  "carPhotoPickError": "Не удалось открыть выбор фото. Полностью перезапустите приложение и попробуйте снова.",
+  "@carPhotoPickError": {
+    "description": "Shown when image picker fails"
+  },
+  "carPhotoRemove": "Удалить фото",
+  "@carPhotoRemove": {
+    "description": "Button to remove a car photo"
+  },
+  "carColorLabel": "Цвет",
+  "@carColorLabel": {
+    "description": "Car color field label"
+  },
+  "carBrandRequired": "Марка обязательна",
+  "@carBrandRequired": {
+    "description": "Validation error when brand is empty"
+  },
+  "carYearInvalid": "Введите корректный год",
+  "@carYearInvalid": {
+    "description": "Validation error when year is not a number"
+  },
+  "carDeleteConfirm": "Вы точно хотите удалить авто? Все данные о нем будут удалены.",
+  "@carDeleteConfirm": {
+    "description": "Confirmation before deleting a car"
+  },
+  "swipeDeleteTip": "Свайп влево удаляет запись",
+  "@swipeDeleteTip": {
+    "description": "Shared hint about swipe-to-delete on list screens"
+  },
+  "doubleTapEditTip": "Двойной тап позволяет редактировать запись",
+  "@doubleTapEditTip": {
+    "description": "Shared hint about double-tap to edit history records"
+  },
+  "tipDontShowAgain": "Не показывать больше",
+  "@tipDontShowAgain": {
+    "description": "Dismisses a one-time UI tip permanently"
+  },
+  "seedCarBrand": "Марка",
+  "@seedCarBrand": {
+    "description": "Placeholder brand name for the seeded car"
+  },
+  "seedCarModel": "Модель",
+  "@seedCarModel": {
+    "description": "Placeholder model name for the seeded car"
+  },
+  "carLimitReached": "Можно добавить не больше {max} автомобилей",
+  "@carLimitReached": {
+    "description": "Shown when the car limit is reached",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "carDeleteLastBlocked": "Нужен хотя бы один автомобиль",
+  "@carDeleteLastBlocked": {
+    "description": "Shown when trying to delete the last remaining car"
+  },
+  "fuelTypeCarsLabel": "Доступно для автомобилей",
+  "@fuelTypeCarsLabel": {
+    "description": "Label above car checkboxes on fuel type form"
+  },
+  "catalogCarsRequired": "Выберите хотя бы один автомобиль",
+  "@catalogCarsRequired": {
+    "description": "Validation when no cars are selected for a car-scoped catalog item"
+  },
+  "partsTitle": "Запчасти",
+  "@partsTitle": {
+    "description": "Title of the parts settings screen"
+  },
+  "partNameLabel": "Название",
+  "@partNameLabel": {
+    "description": "Label for part name field"
+  },
+  "partAddTitle": "Добавить запчасть",
+  "@partAddTitle": {
+    "description": "Dialog title when adding a part"
+  },
+  "partEditTitle": "Редактировать запчасть",
+  "@partEditTitle": {
+    "description": "Dialog title when editing a part"
+  },
+  "partDeleteConfirm": "Вы точно хотите удалить?",
+  "@partDeleteConfirm": {
+    "description": "Confirmation before deleting a part"
+  },
+  "partRestoreConfirm": "Эта запись была помечена как удалённая. Восстановить?",
+  "@partRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted part"
+  },
+  "partAlreadyExists": "Запись с таким названием уже существует",
+  "@partAlreadyExists": {
+    "description": "Error when part name is not unique"
+  },
+  "partNameRequired": "Введите название",
+  "@partNameRequired": {
+    "description": "Validation error when part name is empty"
+  },
+  "servicesTitle": "Сервисные работы",
+  "@servicesTitle": {
+    "description": "Title of the service works settings screen"
+  },
+  "serviceNameLabel": "Название",
+  "@serviceNameLabel": {
+    "description": "Label for service work name field"
+  },
+  "serviceAddTitle": "Добавить работу",
+  "@serviceAddTitle": {
+    "description": "Dialog title when adding a service work"
+  },
+  "serviceEditTitle": "Редактировать работу",
+  "@serviceEditTitle": {
+    "description": "Dialog title when editing a service work"
+  },
+  "serviceDeleteConfirm": "Вы точно хотите удалить?",
+  "@serviceDeleteConfirm": {
+    "description": "Confirmation before deleting a service work"
+  },
+  "serviceRestoreConfirm": "Эта запись была помечена как удалённая. Восстановить?",
+  "@serviceRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted service"
+  },
+  "serviceAlreadyExists": "Запись с таким названием уже существует",
+  "@serviceAlreadyExists": {
+    "description": "Error when service name is not unique"
+  },
+  "serviceNameRequired": "Введите название",
+  "@serviceNameRequired": {
+    "description": "Validation error when service name is empty"
+  },
+  "serviceIconLabel": "Иконка",
+  "@serviceIconLabel": {
+    "description": "Label for optional service icon picker"
+  },
+  "serviceCentersTitle": "Сервисные центры",
+  "@serviceCentersTitle": {
+    "description": "Title of the service centers settings screen"
+  },
+  "serviceCenterAddTitle": "Добавить сервисный центр",
+  "@serviceCenterAddTitle": {
+    "description": "Dialog title when adding a service center"
+  },
+  "serviceCenterEditTitle": "Редактировать сервисный центр",
+  "@serviceCenterEditTitle": {
+    "description": "Dialog title when editing a service center"
+  },
+  "serviceCenterDeleteConfirm": "Вы точно хотите удалить?",
+  "@serviceCenterDeleteConfirm": {
+    "description": "Confirmation before deleting a service center"
+  },
+  "gasStationsTitle": "Сети АЗС",
+  "@gasStationsTitle": {
+    "description": "Title of the gas station chains settings screen"
+  },
+  "gasStationAddTitle": "Добавить сеть",
+  "@gasStationAddTitle": {
+    "description": "Dialog title when adding a gas station chain"
+  },
+  "gasStationEditTitle": "Редактировать сеть",
+  "@gasStationEditTitle": {
+    "description": "Dialog title when editing a gas station chain"
+  },
+  "gasStationAddAddressTitle": "Добавить адрес",
+  "@gasStationAddAddressTitle": {
+    "description": "Dialog title when adding a gas station address"
+  },
+  "gasStationEditAddressTitle": "Редактировать адрес",
+  "@gasStationEditAddressTitle": {
+    "description": "Dialog title when editing a gas station address"
+  },
+  "gasStationNoAddress": "Без адреса",
+  "@gasStationNoAddress": {
+    "description": "Label for a chain location that has no address"
+  },
+  "gasStationAddressesSection": "Адреса",
+  "@gasStationAddressesSection": {
+    "description": "Section header for addresses on the gas station detail screen"
+  },
+  "placeAddressRequired": "Введите адрес",
+  "@placeAddressRequired": {
+    "description": "Validation error when gas station address is empty"
+  },
+  "gasStationLocationsCount": "{count, plural, =0{Нет адресов} =1{1 адрес} few{{count} адреса} many{{count} адресов} other{{count} адресов}}",
+  "@gasStationLocationsCount": {
+    "description": "Subtitle showing how many addresses a chain has",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "gasStationDeleteConfirm": "Вы точно хотите удалить?",
+  "@gasStationDeleteConfirm": {
+    "description": "Confirmation before deleting a gas station chain or address"
+  },
+  "placeNameLabel": "Название",
+  "@placeNameLabel": {
+    "description": "Label for place name field"
+  },
+  "placeAddressLabel": "Адрес",
+  "@placeAddressLabel": {
+    "description": "Label for optional place address field"
+  },
+  "placeNameRequired": "Введите название",
+  "@placeNameRequired": {
+    "description": "Validation error when place name is empty"
+  },
+  "placeAlreadyExists": "Запись с таким названием уже существует",
+  "@placeAlreadyExists": {
+    "description": "Error when place name is not unique"
+  },
+  "placeRestoreConfirm": "Эта запись была помечена как удалённая. Восстановить?",
+  "@placeRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted place"
+  },
+  "unitsFuelSection": "Объём топлива",
+  "@unitsFuelSection": {
+    "description": "Section title for fuel volume units"
+  },
+  "unitsDistanceSection": "Расстояние",
+  "@unitsDistanceSection": {
+    "description": "Section title for distance units"
+  },
+  "unitLiters": "Литры",
+  "@unitLiters": {
+    "description": "Fuel volume unit: liters"
+  },
+  "unitUsGallons": "Галлоны (США)",
+  "@unitUsGallons": {
+    "description": "Fuel volume unit: US gallons"
+  },
+  "unitImperialGallons": "Галлоны (имп.)",
+  "@unitImperialGallons": {
+    "description": "Fuel volume unit: imperial gallons"
+  },
+  "unitKilometers": "Километры",
+  "@unitKilometers": {
+    "description": "Distance unit: kilometers"
+  },
+  "unitMiles": "Мили",
+  "@unitMiles": {
+    "description": "Distance unit: miles"
+  },
+  "fuelingAddTitle": "Добавить заправку",
+  "@fuelingAddTitle": {
+    "description": "Dialog title when adding a fueling"
+  },
+  "fuelingEditTitle": "Редактировать заправку",
+  "@fuelingEditTitle": {
+    "description": "Dialog title when editing a fueling"
+  },
+  "fuelingDeleteConfirm": "Вы точно хотите удалить эту заправку?",
+  "@fuelingDeleteConfirm": {
+    "description": "Confirmation when deleting a fueling record"
+  },
+  "fuelingDateLabel": "Дата",
+  "@fuelingDateLabel": {
+    "description": "Label for fueling date field"
+  },
+  "fuelingPriceLabel": "Цена за {unit}",
+  "@fuelingPriceLabel": {
+    "description": "Label for price per volume unit field",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingQuantityLabel": "Количество ({unit})",
+  "@fuelingQuantityLabel": {
+    "description": "Label for fuel quantity field",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingTotalLabel": "Сумма",
+  "@fuelingTotalLabel": {
+    "description": "Label for total amount field"
+  },
+  "fuelingPriceRequired": "Введите цену",
+  "@fuelingPriceRequired": {
+    "description": "Validation when price is missing or invalid"
+  },
+  "fuelingQuantityRequired": "Введите количество",
+  "@fuelingQuantityRequired": {
+    "description": "Validation when quantity is missing or invalid"
+  },
+  "fuelingQuantityOrTotalRequired": "Введите количество или сумму",
+  "@fuelingQuantityOrTotalRequired": {
+    "description": "Validation when neither quantity nor total is provided"
+  },
+  "fuelingTotalRequired": "Введите сумму",
+  "@fuelingTotalRequired": {
+    "description": "Validation when total amount is missing or invalid"
+  },
+  "fuelingOdometerLabel": "Пробег ({unit})",
+  "@fuelingOdometerLabel": {
+    "description": "Optional odometer field label",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingOdometerInvalid": "Введите корректный пробег",
+  "@fuelingOdometerInvalid": {
+    "description": "Validation when odometer value is invalid"
+  },
+  "fuelingOdometerSequenceTitle": "Необычный пробег",
+  "@fuelingOdometerSequenceTitle": {
+    "description": "Title when odometer breaks chronological order vs neighbors"
+  },
+  "fuelingOdometerLowerTitle": "Пробег меньше более раннего",
+  "@fuelingOdometerLowerTitle": {
+    "description": "Title when odometer is lower than an earlier fueling"
+  },
+  "fuelingOdometerLowerMessage": "Введённый пробег меньше, чем у более ранней заправки ({value} {unit}).",
+  "@fuelingOdometerLowerMessage": {
+    "description": "Warning when odometer is lower than an earlier fueling",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingOdometerHigherTitle": "Пробег больше более позднего",
+  "@fuelingOdometerHigherTitle": {
+    "description": "Title when odometer is higher than a later fueling"
+  },
+  "fuelingOdometerHigherMessage": "Введённый пробег больше, чем у более поздней заправки ({value} {unit}).",
+  "@fuelingOdometerHigherMessage": {
+    "description": "Warning when odometer is higher than a later fueling",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelingOdometerWarningFooter": "Это может исказить расход и другую статистику. Всё равно сохранить?",
+  "@fuelingOdometerWarningFooter": {
+    "description": "Shared footer asking to confirm saving despite odometer warning"
+  },
+  "actionContinue": "Продолжить",
+  "@actionContinue": {
+    "description": "Confirm action to continue despite a warning"
+  },
+  "fuelingListSubtitle": "{quantity} {unit} · {price} / {unit}",
+  "@fuelingListSubtitle": {
+    "description": "Subtitle for a fueling list item",
+    "placeholders": {
+      "quantity": {
+        "type": "String"
+      },
+      "price": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "unitFuelShortLiter": "л",
+  "@unitFuelShortLiter": {
+    "description": "Short label for liters"
+  },
+  "unitFuelShortUsGallon": "gal",
+  "@unitFuelShortUsGallon": {
+    "description": "Short label for US gallons"
+  },
+  "unitFuelShortImperialGallon": "gal имп.",
+  "@unitFuelShortImperialGallon": {
+    "description": "Short label for imperial gallons"
+  },
+  "unitDistanceShortKm": "км",
+  "@unitDistanceShortKm": {
+    "description": "Short label for kilometers"
+  },
+  "unitDistanceShortMile": "ми",
+  "@unitDistanceShortMile": {
+    "description": "Short label for miles"
+  },
+  "currencyCodeLabel": "Код валюты",
+  "@currencyCodeLabel": {
+    "description": "Label for currency code text field"
+  },
+  "currencyCodeHint": "EUR",
+  "@currencyCodeHint": {
+    "description": "Hint example for currency code"
+  },
+  "currencyCodeHelp": "Три латинские буквы, например USD, EUR, RSD",
+  "@currencyCodeHelp": {
+    "description": "Help text under currency code field"
+  },
+  "currencyCodeInvalid": "Введите ровно 3 латинские буквы",
+  "@currencyCodeInvalid": {
+    "description": "Validation when currency code is invalid"
+  },
+  "currenciesEditTitle": "Валюты",
+  "@currenciesEditTitle": {
+    "description": "App bar title for currencies list editor"
+  },
+  "currencyAddTitle": "Добавить валюту",
+  "@currencyAddTitle": {
+    "description": "Dialog title when adding a currency code"
+  },
+  "currencyEditTitle": "Редактировать валюту",
+  "@currencyEditTitle": {
+    "description": "Dialog title when editing a currency code"
+  },
+  "currencyDeleteConfirm": "Вы точно хотите удалить эту валюту?",
+  "@currencyDeleteConfirm": {
+    "description": "Confirm dialog when deleting a currency from the list"
+  },
+  "currencyAlreadyExists": "Эта валюта уже есть в списке",
+  "@currencyAlreadyExists": {
+    "description": "Validation when adding a duplicate currency code"
+  },
+  "currencyCannotDeleteLast": "Оставьте хотя бы одну валюту",
+  "@currencyCannotDeleteLast": {
+    "description": "Shown when trying to remove the last currency"
+  },
+  "fuelingFuelTypeLabel": "Тип топлива",
+  "@fuelingFuelTypeLabel": {
+    "description": "Label for fuel type field on fueling form"
+  },
+  "fuelingFuelTypeRequired": "Выберите или введите тип топлива",
+  "@fuelingFuelTypeRequired": {
+    "description": "Validation when fuel type is empty on fueling form"
+  },
+  "fuelingGasStationLabel": "Заправка",
+  "@fuelingGasStationLabel": {
+    "description": "Optional gas station field on fueling form"
+  },
+  "fuelingGasStationEnsureFailed": "Не удалось сохранить АЗС",
+  "@fuelingGasStationEnsureFailed": {
+    "description": "Error when gas station ensure fails while saving a fueling"
+  },
+  "maintenanceAddTitle": "Добавить обслуживание",
+  "@maintenanceAddTitle": {
+    "description": "Dialog title when adding a maintenance record"
+  },
+  "maintenanceEditTitle": "Редактировать обслуживание",
+  "@maintenanceEditTitle": {
+    "description": "Dialog title when editing a maintenance record"
+  },
+  "maintenanceDeleteConfirm": "Вы точно хотите удалить эту запись обслуживания?",
+  "@maintenanceDeleteConfirm": {
+    "description": "Confirmation when deleting a maintenance record"
+  },
+  "maintenanceDateLabel": "Дата",
+  "@maintenanceDateLabel": {
+    "description": "Label for maintenance date field"
+  },
+  "maintenanceServiceLabel": "Услуга",
+  "@maintenanceServiceLabel": {
+    "description": "Label for service field on maintenance form"
+  },
+  "maintenanceServiceRequired": "Выберите или введите услугу",
+  "@maintenanceServiceRequired": {
+    "description": "Validation when service is empty on maintenance form"
+  },
+  "maintenanceTotalLabel": "Стоимость услуги",
+  "@maintenanceTotalLabel": {
+    "description": "Label for optional service cost field on maintenance form"
+  },
+  "maintenanceTotalInvalid": "Введите корректную стоимость услуги",
+  "@maintenanceTotalInvalid": {
+    "description": "Validation when service cost is non-empty but invalid"
+  },
+  "maintenanceOdometerWarningFooter": "Это может исказить статистику. Сохранить всё равно?",
+  "@maintenanceOdometerWarningFooter": {
+    "description": "Footer asking to confirm saving despite odometer warning on maintenance"
+  },
+  "maintenancePartsSection": "Запчасти",
+  "@maintenancePartsSection": {
+    "description": "Section title for parts list on maintenance form"
+  },
+  "maintenancePartAddTitle": "Добавить запчасть",
+  "@maintenancePartAddTitle": {
+    "description": "Dialog title when adding a part line on maintenance form"
+  },
+  "maintenancePartEditTitle": "Редактировать запчасть",
+  "@maintenancePartEditTitle": {
+    "description": "Dialog title when editing a part line on maintenance form"
+  },
+  "maintenancePartNameLabel": "Запчасть",
+  "@maintenancePartNameLabel": {
+    "description": "Label for part name field on maintenance part dialog"
+  },
+  "maintenancePartNameRequired": "Выберите или введите запчасть",
+  "@maintenancePartNameRequired": {
+    "description": "Validation when part name is empty on maintenance part dialog"
+  },
+  "maintenancePartAmountLabel": "Цена",
+  "@maintenancePartAmountLabel": {
+    "description": "Label for optional unit price on maintenance part dialog"
+  },
+  "maintenancePartAmountInvalid": "Введите корректную цену",
+  "@maintenancePartAmountInvalid": {
+    "description": "Validation when part price is non-empty but invalid"
+  },
+  "maintenancePartQuantityLabel": "Количество",
+  "@maintenancePartQuantityLabel": {
+    "description": "Label for quantity on maintenance part dialog"
+  },
+  "maintenancePartQuantityInvalid": "Введите корректное количество",
+  "@maintenancePartQuantityInvalid": {
+    "description": "Validation when quantity is empty or invalid"
+  },
+  "maintenancePartUnitLabel": "Единица",
+  "@maintenancePartUnitLabel": {
+    "description": "Label for unit of measure on maintenance part dialog"
+  },
+  "maintenancePartCommentLabel": "Комментарий",
+  "@maintenancePartCommentLabel": {
+    "description": "Optional comment for a maintenance part line"
+  },
+  "maintenancePartDeleteConfirm": "Удалить эту запчасть из списка?",
+  "@maintenancePartDeleteConfirm": {
+    "description": "Confirmation when swiping to remove a part line on maintenance form"
+  },
+  "maintenanceGrandTotalLabel": "Сумма",
+  "@maintenanceGrandTotalLabel": {
+    "description": "Label before grand total on maintenance form"
+  },
+  "partUnitsTitle": "Единицы измерения запчастей",
+  "@partUnitsTitle": {
+    "description": "Title of the part units settings screen"
+  },
+  "partUnitNameLabel": "Название",
+  "@partUnitNameLabel": {
+    "description": "Label for part unit name field"
+  },
+  "partUnitAddTitle": "Добавить единицу",
+  "@partUnitAddTitle": {
+    "description": "Dialog title when adding a part unit"
+  },
+  "partUnitEditTitle": "Редактировать единицу",
+  "@partUnitEditTitle": {
+    "description": "Dialog title when editing a part unit"
+  },
+  "partUnitDeleteConfirm": "Вы точно хотите удалить этот элемент?",
+  "@partUnitDeleteConfirm": {
+    "description": "Confirmation before deleting a part unit"
+  },
+  "partUnitRestoreConfirm": "Элемент был помечен как удалённый. Восстановить?",
+  "@partUnitRestoreConfirm": {
+    "description": "Confirmation when adding a name that matches a soft-deleted part unit"
+  },
+  "partUnitAlreadyExists": "Элемент с таким названием уже есть",
+  "@partUnitAlreadyExists": {
+    "description": "Error when part unit name is not unique"
+  },
+  "partUnitNameRequired": "Введите название",
+  "@partUnitNameRequired": {
+    "description": "Validation error when part unit name is empty"
+  },
+  "partUnitLiters": "Литры",
+  "@partUnitLiters": {
+    "description": "Seed name for liters part unit"
+  },
+  "partUnitPieces": "Штуки",
+  "@partUnitPieces": {
+    "description": "Seed name for pieces part unit"
+  },
+  "partUnitPackages": "Упаковки",
+  "@partUnitPackages": {
+    "description": "Seed name for packages part unit"
+  },
+  "statsGroupByMonths": "По месяцам",
+  "@statsGroupByMonths": {
+    "description": "Statistics chart grouping: one bar per month"
+  },
+  "statsGroupByYears": "По годам",
+  "@statsGroupByYears": {
+    "description": "Statistics chart grouping: one bar per year"
+  },
+  "statsPeriodYear": "Год",
+  "@statsPeriodYear": {
+    "description": "Label for year period selector on statistics"
+  },
+  "statsLegendFuel": "Топливо",
+  "@statsLegendFuel": {
+    "description": "Chart legend label for fuel expenses"
+  },
+  "statsLegendMaintenance": "Обслуживание",
+  "@statsLegendMaintenance": {
+    "description": "Chart legend label for maintenance expenses"
+  },
+  "statsTotal": "Итого",
+  "@statsTotal": {
+    "description": "Label for total expenses in the selected period"
+  },
+  "statsFuelDetails": "Топливо по типам",
+  "@statsFuelDetails": {
+    "description": "Section title for fuel expense breakdown"
+  },
+  "statsMaintenanceDetails": "Обслуживание по сервисам",
+  "@statsMaintenanceDetails": {
+    "description": "Section title for maintenance expense breakdown"
+  },
+  "statsUnknownCategory": "Не указано",
+  "@statsUnknownCategory": {
+    "description": "Fallback name when fuel type or service is missing"
+  },
+  "statsEmpty": "Нет расходов за этот период",
+  "@statsEmpty": {
+    "description": "Empty state when statistics have no data for the period"
+  },
+  "statsSelectedPeriod": "Выбранный период",
+  "@statsSelectedPeriod": {
+    "description": "Label above details for the tapped chart bar"
+  },
+  "remindersTitle": "Напоминания",
+  "@remindersTitle": {
+    "description": "Title of the reminders settings screen"
+  },
+  "reminderAddTitle": "Добавить напоминание",
+  "@reminderAddTitle": {
+    "description": "Title when creating a reminder"
+  },
+  "reminderEditTitle": "Редактировать напоминание",
+  "@reminderEditTitle": {
+    "description": "Title when editing a reminder"
+  },
+  "reminderTitleLabel": "Название",
+  "@reminderTitleLabel": {
+    "description": "Label for reminder title field"
+  },
+  "reminderTitleRequired": "Введите название",
+  "@reminderTitleRequired": {
+    "description": "Validation when reminder title is empty"
+  },
+  "reminderCarLabel": "Автомобиль",
+  "@reminderCarLabel": {
+    "description": "Label for car selector on reminder form"
+  },
+  "reminderCarRequired": "Выберите автомобиль",
+  "@reminderCarRequired": {
+    "description": "Validation when no car is selected for a reminder"
+  },
+  "reminderByDate": "По дате",
+  "@reminderByDate": {
+    "description": "Toggle to enable date-based reminder"
+  },
+  "reminderByOdometer": "По пробегу",
+  "@reminderByOdometer": {
+    "description": "Toggle to enable odometer-based reminder"
+  },
+  "reminderDueDateLabel": "Дата события",
+  "@reminderDueDateLabel": {
+    "description": "Label for reminder due date field"
+  },
+  "reminderDateHint": "Выберите дату",
+  "@reminderDateHint": {
+    "description": "Placeholder when reminder due date is not set"
+  },
+  "reminderDateRequired": "Укажите дату события",
+  "@reminderDateRequired": {
+    "description": "Validation when date trigger is enabled but empty"
+  },
+  "reminderOdometerRequired": "Укажите целевой пробег",
+  "@reminderOdometerRequired": {
+    "description": "Validation when odometer trigger is enabled but empty"
+  },
+  "reminderTriggerRequired": "Укажите дату, пробег или оба",
+  "@reminderTriggerRequired": {
+    "description": "Validation when reminder has neither date nor odometer"
+  },
+  "reminderSyncFailed": "Не удалось синхронизировать связанное напоминание",
+  "@reminderSyncFailed": {
+    "description": "Shown when maintenance save fails while syncing its reminder"
+  },
+  "reminderRemindBeforeDaysLabel": "Напомнить за (дней)",
+  "@reminderRemindBeforeDaysLabel": {
+    "description": "Label for days-before reminder window"
+  },
+  "reminderRemindBeforeDistanceLabel": "Напомнить за ({unit})",
+  "@reminderRemindBeforeDistanceLabel": {
+    "description": "Label for distance-before reminder window",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderRemindBeforeInvalid": "Введите неотрицательное значение",
+  "@reminderRemindBeforeInvalid": {
+    "description": "Validation when remind-before value is invalid"
+  },
+  "reminderRemindBeforeDays": "за {days} дн.",
+  "@reminderRemindBeforeDays": {
+    "description": "Subtitle fragment for remind-before days",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "reminderRemindBeforeDistance": "за {distance}",
+  "@reminderRemindBeforeDistance": {
+    "description": "Subtitle fragment for remind-before distance",
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderCompleted": "Выполнено",
+  "@reminderCompleted": {
+    "description": "Toggle / label for marking a reminder as done"
+  },
+  "reminderDeleteConfirm": "Вы точно хотите удалить это напоминание?",
+  "@reminderDeleteConfirm": {
+    "description": "Confirmation before deleting a reminder"
+  },
+  "maintenanceAddReminder": "Добавить напоминание",
+  "@maintenanceAddReminder": {
+    "description": "Button to attach a reminder while creating/editing maintenance"
+  },
+  "maintenanceEditReminder": "Редактировать напоминание",
+  "@maintenanceEditReminder": {
+    "description": "Title/button when a reminder is already attached to maintenance"
+  },
+  "settingsBackup": "Резервная копия",
+  "@settingsBackup": {
+    "description": "Settings list item for export/import backup"
+  },
+  "backupDescription": "Экспортируйте все настройки и события в JSON-файл, поделитесь копией с другим приложением (например Google Диск) или импортируйте ранее сохранённую копию. Точные дубликаты при импорте пропускаются.",
+  "@backupDescription": {
+    "description": "Explanation on the backup settings screen"
+  },
+  "backupExport": "Экспорт в JSON",
+  "@backupExport": {
+    "description": "Button to export data to a JSON file"
+  },
+  "backupShare": "Поделиться копией",
+  "@backupShare": {
+    "description": "Button to share backup JSON via the system share sheet"
+  },
+  "backupImport": "Импорт из JSON",
+  "@backupImport": {
+    "description": "Button to import data from a JSON file"
+  },
+  "backupExportSuccess": "Резервная копия экспортирована",
+  "@backupExportSuccess": {
+    "description": "SnackBar after successful export"
+  },
+  "backupShareSuccess": "Копия отправлена",
+  "@backupShareSuccess": {
+    "description": "SnackBar after the share sheet completed successfully"
+  },
+  "backupExportFailed": "Не удалось экспортировать копию",
+  "@backupExportFailed": {
+    "description": "SnackBar after failed export"
+  },
+  "backupImportSuccess": "Импорт завершён: добавлено {added}, пропущено {skipped}",
+  "@backupImportSuccess": {
+    "description": "SnackBar after successful import with counts",
+    "placeholders": {
+      "added": {
+        "type": "int"
+      },
+      "skipped": {
+        "type": "int"
+      }
+    }
+  },
+  "backupImportFailed": "Не удалось импортировать копию",
+  "@backupImportFailed": {
+    "description": "SnackBar when backup import fails for an unknown/IO reason"
+  },
+  "backupImportPrefsFailed": "Данные импортированы, но настройки применить не удалось",
+  "@backupImportPrefsFailed": {
+    "description": "SnackBar when DB import succeeded but SharedPreferences apply failed"
+  },
+  "backupImportEmpty": "Файл резервной копии пуст",
+  "@backupImportEmpty": {
+    "description": "SnackBar when the selected backup file has no content"
+  },
+  "backupImportInvalid": "Файл резервной копии не является корректным JSON",
+  "@backupImportInvalid": {
+    "description": "SnackBar when the backup file cannot be parsed as a JSON object"
+  },
+  "backupImportUnsupportedVersion": "Эта версия резервной копии не поддерживается",
+  "@backupImportUnsupportedVersion": {
+    "description": "SnackBar when backup JSON version is missing or too new"
+  },
+  "settingsPrivacy": "Политика конфиденциальности",
+  "@settingsPrivacy": {
+    "description": "Settings list item for privacy policy"
+  },
+  "settingsLanguage": "Язык",
+  "@settingsLanguage": {
+    "description": "Settings list item for app language"
+  },
+  "languageSystem": "Как в системе",
+  "@languageSystem": {
+    "description": "Language option that follows the device locale"
+  },
+  "privacyOpenFailed": "Не удалось открыть ссылку",
+  "@privacyOpenFailed": {
+    "description": "SnackBar when url_launcher fails for privacy URL"
+  },
+  "formActionFailed": "Не удалось выполнить действие. Попробуйте ещё раз.",
+  "@formActionFailed": {
+    "description": "SnackBar when fueling/maintenance save or delete throws unexpectedly"
+  },
+  "appStartFailed": "Не удалось запустить приложение. Переустановите его или обратитесь в поддержку.",
+  "@appStartFailed": {
+    "description": "Bootstrap failure message shown instead of raw exceptions"
+  },
+  "photoTooLarge": "Фото слишком большое. Выберите изображение меньшего размера.",
+  "@photoTooLarge": {
+    "description": "SnackBar when car photo exceeds the size limit"
+  }
+}

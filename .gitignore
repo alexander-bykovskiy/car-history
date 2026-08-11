@@ -1,0 +1,76 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# Secrets / local config (never commit real values)
+.env
+.env.*
+!.env.example
+*.pem
+*.p8
+*.p12
+*.mobileprovision
+key.properties
+*.jks
+*.keystore
+**/android/key.properties
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Cursor — раскомментируйте, если не хотите шарить правила/настройки агента
+#.cursor/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+.widget_preview/
+
+# FVM (если используете)
+.fvm/flutter_sdk
+.fvm/versions
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+/android/local.properties
+
+/ios/Pods/
+
+# Когда появится Firebase / Google Services — раскомментируйте
+# и держите в репо только *.example, либо опишите в README, как получить свои файлы:
+# **/google-services.json
+# **/GoogleService-Info.plist
