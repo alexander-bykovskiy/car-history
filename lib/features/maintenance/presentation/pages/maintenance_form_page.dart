@@ -239,7 +239,7 @@ class _MaintenanceFormPageState extends ConsumerState<MaintenanceFormPage> {
                 ),
                 const SizedBox(height: 24),
                 FormActionsBar(
-                  isSaving: _form.saving,
+                  isSaving: _form.saving || !_form.hydrated,
                   onSave: _onSubmit,
                   onDelete: widget.isEditing ? _delete : null,
                 ),

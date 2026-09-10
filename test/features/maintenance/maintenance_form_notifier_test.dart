@@ -4,9 +4,11 @@ import 'package:car_history/features/catalog/data/service_repository_impl.dart';
 import 'package:car_history/features/maintenance/data/catalog_ensurer_adapters.dart';
 import 'package:car_history/features/maintenance/data/reminder_linker_adapter.dart';
 import 'package:car_history/features/maintenance/data/maintenance_repository_impl.dart';
+import 'package:car_history/features/maintenance/domain/entities/reminder_draft.dart';
 import 'package:car_history/features/maintenance/domain/usecases/save_maintenance.dart';
 import 'package:car_history/features/maintenance/presentation/controllers/maintenance_form_notifier.dart';
 import 'package:car_history/features/maintenance/presentation/models/draft_part_line.dart';
+import 'package:car_history/features/maintenance/presentation/models/maintenance_form_data.dart';
 import 'package:car_history/features/reminders/data/reminder_repository_impl.dart';
 import 'package:car_history/shared/data/drift_transaction_runner.dart';
 import 'package:car_history/shared/data/odometer_repository_impl.dart';
@@ -109,6 +111,71 @@ void main() {
       );
       expect(form.serviceError, isNull);
       expect(await db.select(db.maintenances).get(), isEmpty);
+    });
+
+    test('setReminderDraft stamps linked reminderId to avoid duplicates', () {
+      final form = MaintenanceFormNotifier(
+        carId: 1,
+        distanceUnit: DistanceUnit.kilometers,
+        currencyCode: 'EUR',
+        existing: MaintenanceFormData(
+          id: 10,
+          reminderId: 42,
+          servicedAt: DateTime(2024, 1, 1),
+          currencyCode: 'EUR',
+        ),
+        deleteId: 10,
+        initialServiceName: 'Oil',
+      );
+      addTearDown(form.dispose);
+
+      expect(form.linkedReminderId, 42);
+      expect(form.hydrated, isFalse);
+
+      form.setReminderDraft(
+        ReminderDraft(dueAt: DateTime(2024, 6, 1)),
+      );
+      expect(form.reminderDraft?.reminderId, 42);
+    });
+
+    test('submit is busy until edit hydration completes', () async {
+      final db = await openInMemoryDatabase();
+      addTearDown(db.close);
+      final carId = (await db.select(db.cars).getSingle()).id;
+      final odometer = OdometerRepositoryImpl(db);
+      final save = SaveMaintenanceUseCase(
+        maintenanceRepository: MaintenanceRepositoryImpl(db),
+        serviceEnsurer: ServiceEnsurerAdapter(ServiceRepositoryImpl(db)),
+        partEnsurer: PartEnsurerAdapter(PartRepositoryImpl(db)),
+        reminderLinker: ReminderLinkerAdapter(
+          ReminderRepositoryImpl(db, odometerRepository: odometer),
+        ),
+        transactionRunner: DriftTransactionRunner(db),
+      );
+      final form = MaintenanceFormNotifier(
+        carId: carId,
+        distanceUnit: DistanceUnit.kilometers,
+        currencyCode: 'EUR',
+        existing: MaintenanceFormData(
+          id: 1,
+          reminderId: 1,
+          servicedAt: DateTime(2024, 1, 1),
+          currencyCode: 'EUR',
+        ),
+        deleteId: 1,
+        initialServiceName: 'Oil',
+      );
+      addTearDown(form.dispose);
+
+      final outcome = await form.submit(
+        save: save,
+        odometer: odometer,
+        serviceName: 'Oil',
+        totalText: '',
+        odometerText: '',
+        confirmOdometer: (_) async => true,
+      );
+      expect(outcome, isA<MaintenanceFormSubmitBusy>());
     });
   });
 }

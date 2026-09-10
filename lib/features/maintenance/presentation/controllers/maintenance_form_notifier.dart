@@ -30,7 +30,10 @@ class MaintenanceFormNotifier extends ChangeNotifier {
     required this.deleteId,
     required this.initialServiceName,
   })  : _currencyCode = existing?.currencyCode ?? currencyCode,
-        _servicedAt = _initialDate(existing);
+        _servicedAt = _initialDate(existing),
+        _linkedReminderId = existing?.reminderId,
+        // Create needs no async hydration; edit waits for [applyHydration].
+        _hydrated = existing == null;
 
   final int carId;
   final DistanceUnit distanceUnit;
@@ -43,6 +46,7 @@ class MaintenanceFormNotifier extends ChangeNotifier {
   final MaintenanceFormFieldErrors _errors = MaintenanceFormFieldErrors();
   final MaintenancePartsDraft _partsDraft = MaintenancePartsDraft();
   bool _saving = false;
+  bool _hydrated;
   ReminderDraft? _reminderDraft;
   int? _linkedReminderId;
 
@@ -53,6 +57,7 @@ class MaintenanceFormNotifier extends ChangeNotifier {
   SaveMaintenanceFailure? get totalError => _errors.totalError;
   SaveMaintenanceFailure? get odometerError => _errors.odometerError;
   bool get saving => _saving;
+  bool get hydrated => _hydrated;
   List<DraftPartLine> get parts => _partsDraft.parts;
   int get nextPartLocalId => _partsDraft.nextPartLocalId;
   ReminderDraft? get reminderDraft => _reminderDraft;
@@ -120,7 +125,16 @@ class MaintenanceFormNotifier extends ChangeNotifier {
   }
 
   void setReminderDraft(ReminderDraft? draft) {
-    _reminderDraft = draft;
+    if (draft == null) {
+      _reminderDraft = null;
+    } else {
+      final link = draft.reminderId ?? _linkedReminderId ?? existing?.reminderId;
+      _reminderDraft =
+          link == null || draft.reminderId == link
+              ? draft
+              : draft.copyWith(reminderId: link);
+      _linkedReminderId ??= link;
+    }
     notifyListeners();
   }
 
@@ -131,9 +145,18 @@ class MaintenanceFormNotifier extends ChangeNotifier {
   }
 
   void applyHydration(MaintenanceFormHydration hydration) {
-    _linkedReminderId = hydration.reminderDraft?.reminderId;
-    _reminderDraft = hydration.reminderDraft;
+    // Keep the maintenance row's reminder FK as the source of truth for sync.
+    _linkedReminderId =
+        existing?.reminderId ?? hydration.reminderDraft?.reminderId;
+    var draft = hydration.reminderDraft;
+    if (draft != null &&
+        draft.reminderId == null &&
+        _linkedReminderId != null) {
+      draft = draft.copyWith(reminderId: _linkedReminderId);
+    }
+    _reminderDraft = draft;
     _partsDraft.hydrateFromSeeds(hydration.parts);
+    _hydrated = true;
     notifyListeners();
   }
 
@@ -149,6 +172,9 @@ class MaintenanceFormNotifier extends ChangeNotifier {
         confirmOdometer,
   }) async {
     if (_saving) return const MaintenanceFormSubmitOutcome.busy();
+    // Avoid saving before reminder/parts hydration — would orphan or duplicate
+    // the linked reminder (draft null + no linked id → create on next edit).
+    if (!_hydrated) return const MaintenanceFormSubmitOutcome.busy();
 
     final prepared = prepareMaintenanceSave(
       carId: carId,
@@ -160,7 +186,7 @@ class MaintenanceFormNotifier extends ChangeNotifier {
       distanceUnit: distanceUnit,
       parts: _partsDraft.parts,
       reminderDraft: _reminderDraft,
-      linkedReminderId: _linkedReminderId,
+      linkedReminderId: _linkedReminderId ?? existing?.reminderId,
       existingId: existing?.id,
     );
 

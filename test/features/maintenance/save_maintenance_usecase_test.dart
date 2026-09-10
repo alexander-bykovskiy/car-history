@@ -233,5 +233,85 @@ void main() {
       expect(after?.isCompleted, isTrue);
       expect(after?.dueAt, DateTime(2024, 11, 1));
     });
+
+    test('edit with draft missing reminderId updates via linkedReminderId',
+        () async {
+      final created = await saveMaintenance(
+        SaveMaintenanceInput(
+          carId: carId,
+          serviceName: 'Oil Change',
+          servicedAt: DateTime(2024, 5, 1),
+          currencyCode: 'EUR',
+          reminderDraft: ReminderDraft(dueAt: DateTime(2024, 8, 1)),
+        ),
+      );
+      expect(created.isSuccess, isTrue);
+      final maintenanceId = created.outcome!.item!.id;
+      final reminderId = created.outcome!.item!.reminderId!;
+
+      final updated = await saveMaintenance(
+        SaveMaintenanceInput(
+          carId: carId,
+          existingId: maintenanceId,
+          serviceName: 'Oil Change',
+          servicedAt: DateTime(2024, 5, 2),
+          currencyCode: 'EUR',
+          linkedReminderId: reminderId,
+          // Draft without reminderId — form used to drop it and create a duplicate.
+          reminderDraft: ReminderDraft(dueAt: DateTime(2024, 9, 1)),
+        ),
+      );
+      expect(updated.isSuccess, isTrue);
+      expect(updated.outcome!.item!.reminderId, reminderId);
+
+      final rows = await db.select(db.reminders).get();
+      final active = rows.where((r) => !r.isDeleted).toList();
+      expect(active, hasLength(1));
+      expect(active.single.id, reminderId);
+      expect(active.single.dueAt, DateTime(2024, 9, 1));
+    });
+
+    test('edit restores soft-deleted linked reminder instead of duplicating',
+        () async {
+      final created = await saveMaintenance(
+        SaveMaintenanceInput(
+          carId: carId,
+          serviceName: 'Filter',
+          servicedAt: DateTime(2024, 4, 1),
+          currencyCode: 'EUR',
+          reminderDraft: ReminderDraft(dueAt: DateTime(2024, 6, 1)),
+        ),
+      );
+      final reminderId = created.outcome!.item!.reminderId!;
+      final maintenanceId = created.outcome!.item!.id;
+
+      final reminders = ReminderRepositoryImpl(
+        db,
+        odometerRepository: OdometerRepositoryImpl(db),
+      );
+      await reminders.delete(reminderId);
+
+      final updated = await saveMaintenance(
+        SaveMaintenanceInput(
+          carId: carId,
+          existingId: maintenanceId,
+          serviceName: 'Filter',
+          servicedAt: DateTime(2024, 4, 2),
+          currencyCode: 'EUR',
+          linkedReminderId: reminderId,
+          reminderDraft: ReminderDraft(
+            reminderId: reminderId,
+            dueAt: DateTime(2024, 7, 1),
+          ),
+        ),
+      );
+      expect(updated.isSuccess, isTrue);
+      expect(updated.outcome!.item!.reminderId, reminderId);
+
+      final rows = await db.select(db.reminders).get();
+      expect(rows, hasLength(1));
+      expect(rows.single.isDeleted, isFalse);
+      expect(rows.single.dueAt, DateTime(2024, 7, 1));
+    });
   });
 }

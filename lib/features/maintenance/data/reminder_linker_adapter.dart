@@ -28,7 +28,12 @@ class ReminderLinkerAdapter implements ReminderLinker {
     final targetId = draft.reminderId ?? linkedReminderId;
     if (targetId != null) {
       final existing = await _reminders.getById(targetId);
-      if (existing != null && !existing.isDeleted) {
+      if (existing != null) {
+        // Soft-deleted rows still appear in the reminders list — restore and
+        // update instead of creating a second active reminder.
+        if (existing.isDeleted) {
+          await _reminders.restore(existing.id);
+        }
         final reminderInput = ReminderInput(
           carId: carId,
           title: title,
