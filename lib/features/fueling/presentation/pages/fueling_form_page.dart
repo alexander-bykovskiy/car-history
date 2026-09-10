@@ -5,8 +5,8 @@ import '../../../../core/event_date_limits.dart';
 import '../../../../core/number_formatting.dart';
 import '../../../../core/units.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../shared/presentation/delete_confirm_dialog.dart';
 import '../../../../shared/presentation/form_actions_bar.dart';
+import '../../../../shared/presentation/form_session.dart';
 import '../../../../shared/presentation/odometer_sequence_dialog.dart';
 import '../../../../shared/presentation/unit_labels.dart';
 import '../controllers/fueling_form_loader.dart';
@@ -199,9 +199,7 @@ class _FuelingFormPageState extends ConsumerState<FuelingFormPage> {
       case FuelingFormSubmitSuccess():
         Navigator.of(context).pop(true);
       case FuelingFormSubmitUnexpected():
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.formActionFailed)),
-        );
+        showFormActionFailedSnack(context);
       case FuelingFormSubmitFieldError():
       case FuelingFormSubmitCancelled():
       case FuelingFormSubmitBusy():
@@ -212,20 +210,18 @@ class _FuelingFormPageState extends ConsumerState<FuelingFormPage> {
   Future<void> _delete() async {
     if (!_form.isEditing || _form.saving) return;
     final l10n = AppLocalizations.of(context);
-    final confirmed = await showDeleteConfirmDialog(
-      context,
+    final confirmed = await confirmFormDelete(
+      context: context,
       message: l10n.fuelingDeleteConfirm,
     );
-    if (confirmed != true || !mounted) return;
+    if (!confirmed || !mounted) return;
     final outcome = await _form.delete(ref.read(deleteFuelingUseCaseProvider));
     if (!mounted) return;
     switch (outcome) {
       case FuelingFormSubmitSuccess():
         Navigator.of(context).pop(true);
       case FuelingFormSubmitUnexpected():
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.formActionFailed)),
-        );
+        showFormActionFailedSnack(context);
       case FuelingFormSubmitFieldError():
       case FuelingFormSubmitCancelled():
       case FuelingFormSubmitBusy():
@@ -237,47 +233,38 @@ class _FuelingFormPageState extends ConsumerState<FuelingFormPage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.isEditing ? l10n.fuelingEditTitle : l10n.fuelingAddTitle,
-        ),
-      ),
-      body: SafeArea(
-        top: false,
-        child: ListenableBuilder(
-          listenable: _form,
-          builder: (context, _) {
-            return ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                FuelingFormFields(
-                  form: _form,
-                  carId: widget.carId,
-                  volumeUnit: widget.volumeUnit,
-                  distanceUnit: widget.distanceUnit,
-                  fuelTypeController: _fuelTypeController,
-                  gasStationController: _gasStationController,
-                  priceController: _priceController,
-                  quantityController: _quantityController,
-                  totalController: _totalController,
-                  odometerController: _odometerController,
-                  fuelTypeFocus: _fuelTypeFocus,
-                  gasStationFocus: _gasStationFocus,
-                  onPickDate: _pickDate,
-                  onSubmit: _onSubmit,
-                ),
-                const SizedBox(height: 24),
-                FormActionsBar(
-                  isSaving: _form.saving,
-                  onSave: _onSubmit,
-                  onDelete: widget.isEditing ? _delete : null,
-                ),
-              ],
-            );
-          },
-        ),
-      ),
+    return FormSessionScaffold(
+      title: widget.isEditing ? l10n.fuelingEditTitle : l10n.fuelingAddTitle,
+      listenable: _form,
+      body: (context) {
+        return ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            FuelingFormFields(
+              form: _form,
+              carId: widget.carId,
+              volumeUnit: widget.volumeUnit,
+              distanceUnit: widget.distanceUnit,
+              fuelTypeController: _fuelTypeController,
+              gasStationController: _gasStationController,
+              priceController: _priceController,
+              quantityController: _quantityController,
+              totalController: _totalController,
+              odometerController: _odometerController,
+              fuelTypeFocus: _fuelTypeFocus,
+              gasStationFocus: _gasStationFocus,
+              onPickDate: _pickDate,
+              onSubmit: _onSubmit,
+            ),
+            const SizedBox(height: 24),
+            FormActionsBar(
+              isSaving: _form.saving,
+              onSave: _onSubmit,
+              onDelete: widget.isEditing ? _delete : null,
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/event_date_limits.dart';
 import '../../../../core/units.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../shared/presentation/delete_confirm_dialog.dart';
 import '../../../../shared/presentation/form_actions_bar.dart';
+import '../../../../shared/presentation/form_session.dart';
 import '../../../../shared/presentation/reminder_odometer_prefill.dart';
 import '../../../../shared/presentation/reminder_trigger_fields.dart';
 import '../../../../shared/presentation/reminder_trigger_form.dart';
@@ -175,11 +175,11 @@ class _ReminderFormPageState extends ConsumerState<ReminderFormPage> {
     if (widget.existing == null || _form.saving) return;
 
     final l10n = AppLocalizations.of(context);
-    final confirmed = await showDeleteConfirmDialog(
-      context,
+    final confirmed = await confirmFormDelete(
+      context: context,
       message: l10n.reminderDeleteConfirm,
     );
-    if (confirmed != true || !mounted) return;
+    if (!confirmed || !mounted) return;
 
     final outcome =
         await _form.delete(ref.read(deleteReminderUseCaseProvider));
@@ -194,97 +194,88 @@ class _ReminderFormPageState extends ConsumerState<ReminderFormPage> {
     final l10n = AppLocalizations.of(context);
     final carRepository = ref.watch(carRepositoryProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.existing == null
-              ? l10n.reminderAddTitle
-              : l10n.reminderEditTitle,
-        ),
-      ),
-      body: SafeArea(
-        top: false,
-        child: ListenableBuilder(
-          listenable: _form,
-          builder: (context, _) {
-            return ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                TextField(
-                  controller: _titleController,
-                  decoration: InputDecoration(
-                    labelText: l10n.reminderTitleLabel,
-                    errorText: _form.titleError == ReminderFormTitleError.required
-                        ? l10n.reminderTitleRequired
-                        : null,
-                    border: const OutlineInputBorder(),
-                  ),
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(height: _sectionGap),
-                StreamBuilder<List<CarListItem>>(
-                  stream: carRepository.watchAll(),
-                  builder: (context, snapshot) {
-                    final cars = snapshot.data ?? const <CarListItem>[];
-                    final selectedId = cars.any((c) => c.id == _form.carId)
-                        ? _form.carId
-                        : null;
-                    return DropdownMenu<int>(
-                      key: ValueKey('car-$selectedId-${cars.length}'),
-                      initialSelection: selectedId,
-                      label: Text(l10n.reminderCarLabel),
-                      expandedInsets: EdgeInsets.zero,
-                      dropdownMenuEntries: [
-                        for (final item in cars)
-                          DropdownMenuEntry(
-                            value: item.id,
-                            label: item.displayTitle,
-                          ),
-                      ],
-                      onSelected: _onCarIdChanged,
-                    );
-                  },
-                ),
-                const SizedBox(height: _sectionGap),
-                ReminderTriggerFields(
-                  useDate: _form.useDate,
-                  useOdometer: _form.useOdometer,
-                  dueAt: _form.dueAt,
-                  distanceUnit: _form.distanceUnit,
-                  odometerController: _odometerController,
-                  remindBeforeDaysController: _remindBeforeDaysController,
-                  remindBeforeKmController: _remindBeforeKmController,
-                  triggerError: _form.triggerError,
-                  odometerError: _form.odometerError,
-                  remindBeforeDaysError: _form.remindBeforeDaysError,
-                  remindBeforeKmError: _form.remindBeforeKmError,
-                  onUseDateChanged: _form.setUseDate,
-                  onUseOdometerChanged: _onUseOdometerChanged,
-                  onPickDate: _pickDate,
-                  odometerInputMode: _form.odometerInputMode,
-                  onOdometerInputModeChanged: _onOdometerInputModeChanged,
-                  baselineOdometerKm: _form.baselineOdometerKm,
-                  sectionGap: _sectionGap,
-                ),
-                const SizedBox(height: _sectionGap),
-                if (widget.existing != null)
-                  SwitchListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(l10n.reminderCompleted),
-                    value: _form.isCompleted,
-                    onChanged: _form.setCompleted,
-                  ),
-                if (widget.existing != null) const SizedBox(height: _sectionGap),
-                FormActionsBar(
-                  isSaving: _form.saving,
-                  onSave: _save,
-                  onDelete: widget.existing != null ? _delete : null,
-                ),
-              ],
-            );
-          },
-        ),
-      ),
+    return FormSessionScaffold(
+      title: widget.existing == null
+          ? l10n.reminderAddTitle
+          : l10n.reminderEditTitle,
+      listenable: _form,
+      body: (context) {
+        return ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            TextField(
+              controller: _titleController,
+              decoration: InputDecoration(
+                labelText: l10n.reminderTitleLabel,
+                errorText: _form.titleError == ReminderFormTitleError.required
+                    ? l10n.reminderTitleRequired
+                    : null,
+                border: const OutlineInputBorder(),
+              ),
+              textInputAction: TextInputAction.next,
+            ),
+            const SizedBox(height: _sectionGap),
+            StreamBuilder<List<CarListItem>>(
+              stream: carRepository.watchAll(),
+              builder: (context, snapshot) {
+                final cars = snapshot.data ?? const <CarListItem>[];
+                final selectedId = cars.any((c) => c.id == _form.carId)
+                    ? _form.carId
+                    : null;
+                return DropdownMenu<int>(
+                  key: ValueKey('car-$selectedId-${cars.length}'),
+                  initialSelection: selectedId,
+                  label: Text(l10n.reminderCarLabel),
+                  expandedInsets: EdgeInsets.zero,
+                  dropdownMenuEntries: [
+                    for (final item in cars)
+                      DropdownMenuEntry(
+                        value: item.id,
+                        label: item.displayTitle,
+                      ),
+                  ],
+                  onSelected: _onCarIdChanged,
+                );
+              },
+            ),
+            const SizedBox(height: _sectionGap),
+            ReminderTriggerFields(
+              useDate: _form.useDate,
+              useOdometer: _form.useOdometer,
+              dueAt: _form.dueAt,
+              distanceUnit: _form.distanceUnit,
+              odometerController: _odometerController,
+              remindBeforeDaysController: _remindBeforeDaysController,
+              remindBeforeKmController: _remindBeforeKmController,
+              triggerError: _form.triggerError,
+              odometerError: _form.odometerError,
+              remindBeforeDaysError: _form.remindBeforeDaysError,
+              remindBeforeKmError: _form.remindBeforeKmError,
+              onUseDateChanged: _form.setUseDate,
+              onUseOdometerChanged: _onUseOdometerChanged,
+              onPickDate: _pickDate,
+              odometerInputMode: _form.odometerInputMode,
+              onOdometerInputModeChanged: _onOdometerInputModeChanged,
+              baselineOdometerKm: _form.baselineOdometerKm,
+              sectionGap: _sectionGap,
+            ),
+            const SizedBox(height: _sectionGap),
+            if (widget.existing != null)
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: Text(l10n.reminderCompleted),
+                value: _form.isCompleted,
+                onChanged: _form.setCompleted,
+              ),
+            if (widget.existing != null) const SizedBox(height: _sectionGap),
+            FormActionsBar(
+              isSaving: _form.saving,
+              onSave: _save,
+              onDelete: widget.existing != null ? _delete : null,
+            ),
+          ],
+        );
+      },
     );
   }
 }

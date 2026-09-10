@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/number_formatting.dart';
 import '../../../../core/units.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../shared/presentation/delete_confirm_dialog.dart';
 import '../../../../shared/presentation/form_actions_bar.dart';
+import '../../../../shared/presentation/form_session.dart';
 import '../../../../shared/presentation/odometer_sequence_dialog.dart';
 import '../../../../shared/presentation/unit_labels.dart';
 import '../controllers/maintenance_form_loader.dart';
@@ -160,9 +160,7 @@ class _MaintenanceFormPageState extends ConsumerState<MaintenanceFormPage> {
           SnackBar(content: Text(maintenanceFailureMessage(l10n, error))),
         );
       case MaintenanceFormSubmitUnexpected():
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.formActionFailed)),
-        );
+        showFormActionFailedSnack(context);
       case MaintenanceFormSubmitFieldError():
       case MaintenanceFormSubmitCancelled():
       case MaintenanceFormSubmitBusy():
@@ -174,11 +172,11 @@ class _MaintenanceFormPageState extends ConsumerState<MaintenanceFormPage> {
     if (widget.deleteId == null || _form.saving) return;
 
     final l10n = AppLocalizations.of(context);
-    final confirmed = await showDeleteConfirmDialog(
-      context,
+    final confirmed = await confirmFormDelete(
+      context: context,
       message: l10n.maintenanceDeleteConfirm,
     );
-    if (confirmed != true || !mounted) return;
+    if (!confirmed || !mounted) return;
 
     final outcome =
         await _form.delete(ref.read(deleteMaintenanceUseCaseProvider));
@@ -187,9 +185,7 @@ class _MaintenanceFormPageState extends ConsumerState<MaintenanceFormPage> {
       case MaintenanceFormSubmitSuccess():
         Navigator.of(context).pop(true);
       case MaintenanceFormSubmitUnexpected():
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.formActionFailed)),
-        );
+        showFormActionFailedSnack(context);
       case MaintenanceFormSubmitSnack():
       case MaintenanceFormSubmitFieldError():
       case MaintenanceFormSubmitCancelled():
@@ -202,52 +198,43 @@ class _MaintenanceFormPageState extends ConsumerState<MaintenanceFormPage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.isEditing
-              ? l10n.maintenanceEditTitle
-              : l10n.maintenanceAddTitle,
-        ),
-      ),
-      body: SafeArea(
-        top: false,
-        child: ListenableBuilder(
-          listenable: Listenable.merge([_form, _totalController]),
-          builder: (context, _) {
-            return ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                MaintenanceFormFields(
-                  form: _form,
-                  distanceUnit: widget.distanceUnit,
-                  serviceController: _serviceController,
-                  totalController: _totalController,
-                  odometerController: _odometerController,
-                  serviceFocus: _serviceFocus,
-                ),
-                const SizedBox(height: 24),
-                MaintenancePartsSection(
-                  form: _form,
-                  totalText: _totalController.text,
-                ),
-                const SizedBox(height: 24),
-                MaintenanceReminderSection(
-                  form: _form,
-                  distanceUnit: widget.distanceUnit,
-                  odometerText: _odometerController.text,
-                ),
-                const SizedBox(height: 24),
-                FormActionsBar(
-                  isSaving: _form.saving || !_form.hydrated,
-                  onSave: _onSubmit,
-                  onDelete: widget.isEditing ? _delete : null,
-                ),
-              ],
-            );
-          },
-        ),
-      ),
+    return FormSessionScaffold(
+      title: widget.isEditing
+          ? l10n.maintenanceEditTitle
+          : l10n.maintenanceAddTitle,
+      listenable: Listenable.merge([_form, _totalController]),
+      body: (context) {
+        return ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            MaintenanceFormFields(
+              form: _form,
+              distanceUnit: widget.distanceUnit,
+              serviceController: _serviceController,
+              totalController: _totalController,
+              odometerController: _odometerController,
+              serviceFocus: _serviceFocus,
+            ),
+            const SizedBox(height: 24),
+            MaintenancePartsSection(
+              form: _form,
+              totalText: _totalController.text,
+            ),
+            const SizedBox(height: 24),
+            MaintenanceReminderSection(
+              form: _form,
+              distanceUnit: widget.distanceUnit,
+              odometerText: _odometerController.text,
+            ),
+            const SizedBox(height: 24),
+            FormActionsBar(
+              isSaving: _form.saving || !_form.hydrated,
+              onSave: _onSubmit,
+              onDelete: widget.isEditing ? _delete : null,
+            ),
+          ],
+        );
+      },
     );
   }
 }

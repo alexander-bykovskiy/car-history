@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 import '../../../shared/data/db/app_database.dart';
 import '../../../core/name_normalizer.dart';
 import '../../../core/named_match.dart';
+import '../../../core/report_caught_error.dart';
 import '../domain/entities/car_brand.dart';
 import '../domain/repositories/car_brand_repository.dart';
 
@@ -66,7 +67,8 @@ class CarBrandRepositoryImpl implements CarBrandRepository {
             ..where((t) => t.id.equals(id)))
           .getSingle();
       return _mapBrand(created);
-    } catch (_) {
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'CarBrandRepositoryImpl.findOrCreate');
       final created = await findByName(name);
       if (created != null) return created;
       rethrow;

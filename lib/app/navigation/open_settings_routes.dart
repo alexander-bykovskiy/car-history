@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/report_caught_error.dart';
 import '../../features/cars/presentation/pages/cars_page.dart';
 import '../../features/catalog/presentation/pages/fuel_types_page.dart';
 import '../../features/catalog/presentation/pages/gas_stations_page.dart';
@@ -59,7 +60,8 @@ Future<void> openPrivacyPolicy(BuildContext context) async {
     if (!opened) {
       opened = await launchUrl(uri, mode: LaunchMode.platformDefault);
     }
-  } catch (_) {
+  } catch (e, st) {
+    reportCaughtError(e, st, context: 'openPrivacyPolicy');
     opened = false;
   }
   if (!opened && context.mounted) {

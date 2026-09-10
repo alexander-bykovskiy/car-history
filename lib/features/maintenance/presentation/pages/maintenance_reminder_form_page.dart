@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/event_date_limits.dart';
 import '../../../../core/units.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../shared/presentation/delete_confirm_dialog.dart';
 import '../../../../shared/presentation/form_actions_bar.dart';
+import '../../../../shared/presentation/form_session.dart';
 import '../../../../shared/presentation/reminder_odometer_prefill.dart';
 import '../../../../shared/presentation/reminder_trigger_fields.dart';
 import '../../../../shared/presentation/reminder_trigger_form.dart';
@@ -168,11 +168,11 @@ class _MaintenanceReminderFormPageState
 
   Future<void> _delete() async {
     final l10n = AppLocalizations.of(context);
-    final confirmed = await showDeleteConfirmDialog(
-      context,
+    final confirmed = await confirmFormDelete(
+      context: context,
       message: l10n.reminderDeleteConfirm,
     );
-    if (confirmed != true || !mounted) return;
+    if (!confirmed || !mounted) return;
     Navigator.of(context).pop(const MaintenanceReminderFormResult.removed());
   }
 
@@ -180,53 +180,44 @@ class _MaintenanceReminderFormPageState
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          _form.isEditing
-              ? l10n.maintenanceEditReminder
-              : l10n.maintenanceAddReminder,
-        ),
-      ),
-      body: SafeArea(
-        top: false,
-        child: ListenableBuilder(
-          listenable: _form,
-          builder: (context, _) {
-            return ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                ReminderTriggerFields(
-                  useDate: _form.useDate,
-                  useOdometer: _form.useOdometer,
-                  dueAt: _form.dueAt,
-                  distanceUnit: widget.distanceUnit,
-                  odometerController: _odometerController,
-                  remindBeforeDaysController: _remindBeforeDaysController,
-                  remindBeforeKmController: _remindBeforeKmController,
-                  triggerError: _form.triggerError,
-                  odometerError: _form.odometerError,
-                  remindBeforeDaysError: _form.remindBeforeDaysError,
-                  remindBeforeKmError: _form.remindBeforeKmError,
-                  onUseDateChanged: _form.setUseDate,
-                  onUseOdometerChanged: _onUseOdometerChanged,
-                  onPickDate: _pickDate,
-                  odometerInputMode: _form.odometerInputMode,
-                  onOdometerInputModeChanged: _onOdometerInputModeChanged,
-                  baselineOdometerKm: _form.baselineOdometerKm,
-                  sectionGap: _sectionGap,
-                ),
-                const SizedBox(height: _sectionGap),
-                FormActionsBar(
-                  isSaving: false,
-                  onSave: _submit,
-                  onDelete: _form.isEditing ? _delete : null,
-                ),
-              ],
-            );
-          },
-        ),
-      ),
+    return FormSessionScaffold(
+      title: _form.isEditing
+          ? l10n.maintenanceEditReminder
+          : l10n.maintenanceAddReminder,
+      listenable: _form,
+      body: (context) {
+        return ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            ReminderTriggerFields(
+              useDate: _form.useDate,
+              useOdometer: _form.useOdometer,
+              dueAt: _form.dueAt,
+              distanceUnit: widget.distanceUnit,
+              odometerController: _odometerController,
+              remindBeforeDaysController: _remindBeforeDaysController,
+              remindBeforeKmController: _remindBeforeKmController,
+              triggerError: _form.triggerError,
+              odometerError: _form.odometerError,
+              remindBeforeDaysError: _form.remindBeforeDaysError,
+              remindBeforeKmError: _form.remindBeforeKmError,
+              onUseDateChanged: _form.setUseDate,
+              onUseOdometerChanged: _onUseOdometerChanged,
+              onPickDate: _pickDate,
+              odometerInputMode: _form.odometerInputMode,
+              onOdometerInputModeChanged: _onOdometerInputModeChanged,
+              baselineOdometerKm: _form.baselineOdometerKm,
+              sectionGap: _sectionGap,
+            ),
+            const SizedBox(height: _sectionGap),
+            FormActionsBar(
+              isSaving: false,
+              onSave: _submit,
+              onDelete: _form.isEditing ? _delete : null,
+            ),
+          ],
+        );
+      },
     );
   }
 }

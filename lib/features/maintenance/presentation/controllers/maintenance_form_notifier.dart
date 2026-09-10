@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../../../core/report_caught_error.dart';
 import '../../../../core/units.dart';
 import '../../../../shared/domain/event_odometer_warning.dart';
 import '../../../../shared/domain/odometer_repository.dart';
@@ -237,7 +238,8 @@ class MaintenanceFormNotifier extends ChangeNotifier {
         return MaintenanceFormSubmitOutcome.fieldError(failure);
       }
       return MaintenanceFormSubmitOutcome.snack(failure);
-    } catch (_) {
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'MaintenanceFormNotifier.submit');
       return const MaintenanceFormSubmitOutcome.unexpected();
     } finally {
       _saving = false;
@@ -258,7 +260,8 @@ class MaintenanceFormNotifier extends ChangeNotifier {
     try {
       await deleteUseCase(id);
       return const MaintenanceFormSubmitOutcome.success();
-    } catch (_) {
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'MaintenanceFormNotifier.delete');
       return const MaintenanceFormSubmitOutcome.unexpected();
     } finally {
       _saving = false;

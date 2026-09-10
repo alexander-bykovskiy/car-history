@@ -5,6 +5,7 @@ import '../../../../core/number_formatting.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/presentation/decimal_input_formatters.dart';
 import '../../../../shared/presentation/form_actions_bar.dart';
+import '../../../../shared/presentation/form_session.dart';
 import '../../../catalog/domain/entities/named_catalog_item.dart';
 import '../../../catalog/presentation/widgets/part_autocomplete_field.dart';
 import '../../../settings/di/preferences_providers.dart';
@@ -115,19 +116,12 @@ class _MaintenancePartFormPageState
     final l10n = AppLocalizations.of(context);
     final existing = widget.existing;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          existing == null
-              ? l10n.maintenancePartAddTitle
-              : l10n.maintenancePartEditTitle,
-        ),
-      ),
-      body: SafeArea(
-        top: false,
-        child: ListenableBuilder(
-          listenable: _form,
-          builder: (context, _) {
+    return FormSessionScaffold(
+      title: existing == null
+          ? l10n.maintenancePartAddTitle
+          : l10n.maintenancePartEditTitle,
+      listenable: _form,
+      body: (context) {
             if (_form.unitsLoading) {
               return const Center(
                 child: SizedBox(
@@ -211,9 +205,7 @@ class _MaintenancePartFormPageState
                 ),
               ],
             );
-          },
-        ),
-      ),
+      },
     );
   }
 }

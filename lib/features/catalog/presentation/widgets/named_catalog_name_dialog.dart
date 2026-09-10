@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/presentation/dialog_actions.dart';
@@ -7,7 +6,7 @@ import '../../domain/entities/named_catalog_item.dart';
 import '../catalog_dialog_submit.dart';
 
 /// Shared name-only create/edit dialog for simple named catalogs.
-class NamedCatalogNameDialog<T> extends ConsumerStatefulWidget {
+class NamedCatalogNameDialog<T> extends StatefulWidget {
   const NamedCatalogNameDialog({
     required this.addTitle,
     required this.editTitle,
@@ -36,12 +35,11 @@ class NamedCatalogNameDialog<T> extends ConsumerStatefulWidget {
   final Future<void> Function(T restorable) onRestore;
 
   @override
-  ConsumerState<NamedCatalogNameDialog<T>> createState() =>
+  State<NamedCatalogNameDialog<T>> createState() =>
       _NamedCatalogNameDialogState<T>();
 }
 
-class _NamedCatalogNameDialogState<T>
-    extends ConsumerState<NamedCatalogNameDialog<T>> {
+class _NamedCatalogNameDialogState<T> extends State<NamedCatalogNameDialog<T>> {
   late final TextEditingController _controller;
   String? _errorText;
   bool _saving = false;

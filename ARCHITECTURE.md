@@ -25,6 +25,20 @@ Each feature typically has:
 - `di/` — Riverpod wiring for ensurers / use cases (when presentation must not import data adapters)
 - `presentation/` — pages, form controllers / notifiers
 
+## State management & navigation (intentional hybrid)
+
+- **Riverpod** owns composition-root DI, preference `AsyncNotifier`s,
+  `selectedCarProvider`, and use-case / repository providers.
+- **ChangeNotifier** owns non-trivial form sessions (`*FormNotifier`) and
+  paged list controllers. Pages bind with `Consumer*` + `ListenableBuilder`
+  (via `FormSessionScaffold` where applicable).
+- Do **not** migrate forms to Riverpod `Notifier` / introduce `go_router`
+  without a concrete product need (deep links, web routing, multi-team onboarding
+  pain). Imperative Navigator 1.0 + `app/navigation/` open helpers is the
+  current canon for this offline store app.
+- Cross-feature hops stay in `app/navigation/`; intra-feature may `Navigator.push`
+  sibling pages in the same feature.
+
 ## Cross-feature navigation
 
 Composition-root helpers in `app/navigation/` open feature **pages** and event editors:
@@ -216,10 +230,15 @@ tests before merge:
      `validateReminderWrite`
 4. Contract tests: runtime rule test **and** backup import test for the same
    invariant (see `test/features/settings/backup_importer_test.dart` and feature
-   write tests). Cursor rule: `.cursor/rules/backup-runtime-dual-path.mdc`
-   (includes runtime ↔ backup file pairing). PR template
-   (`.github/PULL_REQUEST_TEMPLATE.md`) has a dual-path checklist — mark N/A
-   when the change does not touch write rules / schema / merge.
+   write tests). Behavior parity for shared validators:
+   `test/features/settings/backup_runtime_write_parity_test.dart`. Architecture
+   hygiene: `test/architecture/backup_dual_path_test.dart`. Cursor rule:
+   `.cursor/rules/backup-runtime-dual-path.mdc` (includes runtime ↔ backup file
+   pairing). PR template (`.github/PULL_REQUEST_TEMPLATE.md`) has a dual-path
+   checklist — mark N/A when the change does not touch write rules / schema /
+   merge.
+5. Do **not** route bulk import through feature repositories “for purity” and
+   do **not** invent a third copy of numeric/name/address rules in the importer.
 
 ## Dependency injection
 
@@ -337,6 +356,14 @@ tests before merge:
   `reminder_trigger_session.dart`. Do not duplicate the switch + field layout
   in feature form pages.
 - Form session state (load / field sync / save / delete) lives in a `*FormNotifier` (`ChangeNotifier`) where the form is non-trivial; reference: maintenance, fueling, reminder, **car**.
+- Entity form pages share `FormSessionScaffold` / `confirmFormDelete` /
+  `showFormActionFailedSnack` (`shared/presentation/form_session.dart`) for
+  AppBar + SafeArea + `ListenableBuilder` chrome and common save/delete UX.
+  Feature-specific field layout stays in the page / feature widgets.
+- Unexpected catches in form notifiers and similar paths use
+  `reportCaughtError` (`core/report_caught_error.dart`) then map to the same
+  user-facing outcome as before (SnackBar / unexpected outcome) — do not show
+  raw exceptions.
 - `*FormNotifier` must **not** take `WidgetRef`. The page reads providers and passes use cases / repositories into notifier methods.
 - Fueling / maintenance form delete returns the same `*FormSubmitOutcome` sealed type as save (not `bool`). Unexpected throws from save/delete map to `*FormSubmitUnexpected` and the page shows `formActionFailed` via SnackBar. Domain field vs snack split stays feature-specific (maintenance non-field failures use `snack(SaveMaintenanceFailure)`).
 - Write validation for persisted entities lives in feature domain helpers

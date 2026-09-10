@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import '../../../../core/report_caught_error.dart';
 import '../../../../core/units.dart';
 import '../../../../shared/domain/event_odometer_warning.dart';
 import '../../../../shared/domain/odometer_repository.dart';
@@ -197,7 +198,8 @@ class FuelingFormNotifier extends ChangeNotifier {
         return FuelingFormSubmitOutcome.fieldError(fieldError);
       }
       return const FuelingFormSubmitOutcome.cancelled();
-    } catch (_) {
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'FuelingFormNotifier.submit');
       return const FuelingFormSubmitOutcome.unexpected();
     } finally {
       _saving = false;
@@ -217,7 +219,8 @@ class FuelingFormNotifier extends ChangeNotifier {
     try {
       await deleteUseCase(id);
       return const FuelingFormSubmitOutcome.success();
-    } catch (_) {
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'FuelingFormNotifier.delete');
       return const FuelingFormSubmitOutcome.unexpected();
     } finally {
       _saving = false;

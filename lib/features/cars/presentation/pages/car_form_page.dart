@@ -5,14 +5,15 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../domain/entities/car.dart';
 import '../../di/cars_providers.dart';
+import '../../../../core/report_caught_error.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../car_failure_messages.dart';
 import '../controllers/car_form_notifier.dart';
 import '../widgets/brand_autocomplete_field.dart';
 import '../widgets/car_color_picker.dart';
-import '../../../../shared/presentation/delete_confirm_dialog.dart';
 import '../../../../shared/presentation/destructive_outlined_icon_button.dart';
 import '../../../../shared/presentation/form_actions_bar.dart';
+import '../../../../shared/presentation/form_session.dart';
 
 class CarFormPage extends ConsumerStatefulWidget {
   const CarFormPage({this.existing, super.key});
@@ -80,7 +81,8 @@ class _CarFormPageState extends ConsumerState<CarFormPage> {
           SnackBar(content: Text(l10n.photoTooLarge)),
         );
       }
-    } catch (_) {
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'CarFormPage.pickPhoto');
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(l10n.carPhotoPickError)),
@@ -115,11 +117,11 @@ class _CarFormPageState extends ConsumerState<CarFormPage> {
     if (widget.existing == null || _form.saving) return;
 
     final l10n = AppLocalizations.of(context);
-    final confirmed = await showDeleteConfirmDialog(
-      context,
+    final confirmed = await confirmFormDelete(
+      context: context,
       message: l10n.carDeleteConfirm,
     );
-    if (confirmed != true || !mounted) return;
+    if (!confirmed || !mounted) return;
 
     final outcome = await _form.delete(
       deleteCar: ref.read(deleteCarUseCaseProvider),
@@ -143,15 +145,10 @@ class _CarFormPageState extends ConsumerState<CarFormPage> {
     final brandRepo = ref.watch(carBrandRepositoryProvider);
     final isEdit = widget.existing != null;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(isEdit ? l10n.carEditTitle : l10n.carAddTitle),
-      ),
-      body: SafeArea(
-        top: false,
-        child: ListenableBuilder(
-          listenable: _form,
-          builder: (context, _) {
+    return FormSessionScaffold(
+      title: isEdit ? l10n.carEditTitle : l10n.carAddTitle,
+      listenable: _form,
+      body: (context) {
             final photoBytes = _form.photoBytes;
             return ListView(
               padding: const EdgeInsets.all(16),
@@ -178,6 +175,7 @@ class _CarFormPageState extends ConsumerState<CarFormPage> {
                               ),
                             )
                           : DecoratedBox(
+
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
                                 border: Border.all(
@@ -262,9 +260,7 @@ class _CarFormPageState extends ConsumerState<CarFormPage> {
                 ),
               ],
             );
-          },
-        ),
-      ),
+      },
     );
   }
 }
