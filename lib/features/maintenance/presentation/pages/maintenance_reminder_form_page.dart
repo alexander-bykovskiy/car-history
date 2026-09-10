@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/event_date_limits.dart';
 import '../../../../core/units.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/presentation/delete_confirm_dialog.dart';
 import '../../../../shared/presentation/form_actions_bar.dart';
+import '../../../../shared/presentation/reminder_odometer_prefill.dart';
 import '../../../../shared/presentation/reminder_trigger_fields.dart';
+import '../../../../shared/presentation/reminder_trigger_form.dart';
+import '../../../reminders/di/reminder_providers.dart';
 import '../../domain/entities/reminder_draft.dart';
 import '../controllers/maintenance_reminder_form_notifier.dart';
 
@@ -23,23 +27,30 @@ class MaintenanceReminderFormResult {
 }
 
 /// Reminder fields for a maintenance record (no title / car / completed).
-class MaintenanceReminderFormPage extends StatefulWidget {
+class MaintenanceReminderFormPage extends ConsumerStatefulWidget {
   const MaintenanceReminderFormPage({
+    required this.carId,
     required this.distanceUnit,
     this.initial,
+    this.prefillOdometerText,
     super.key,
   });
 
+  final int carId;
   final DistanceUnit distanceUnit;
   final ReminderDraft? initial;
 
+  /// Odometer from the parent maintenance form (display units), used when
+  /// creating a new reminder draft.
+  final String? prefillOdometerText;
+
   @override
-  State<MaintenanceReminderFormPage> createState() =>
+  ConsumerState<MaintenanceReminderFormPage> createState() =>
       _MaintenanceReminderFormPageState();
 }
 
 class _MaintenanceReminderFormPageState
-    extends State<MaintenanceReminderFormPage> {
+    extends ConsumerState<MaintenanceReminderFormPage> {
   static const _sectionGap = 24.0;
 
   final _odometerController = TextEditingController();
@@ -70,6 +81,51 @@ class _MaintenanceReminderFormPageState
           widget.distanceUnit.fromKilometers(initial.remindBeforeKm!),
         );
       }
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _loadBaseline();
+    });
+  }
+
+  Future<void> _loadBaseline({bool fillAbsoluteField = false}) async {
+    final baselineKm = await ReminderOdometerPrefill.resolveBaselineKm(
+      odometer: ref.read(odometerRepositoryProvider),
+      carId: widget.carId,
+      distanceUnit: widget.distanceUnit,
+      preferredDisplayText: widget.prefillOdometerText,
+    );
+    if (!mounted) return;
+    _form.setBaselineOdometerKm(baselineKm);
+    if (!fillAbsoluteField) return;
+    final text = ReminderOdometerPrefill.absoluteFieldText(
+      baselineKm: baselineKm,
+      mode: _form.odometerInputMode,
+      distanceUnit: widget.distanceUnit,
+      currentText: _odometerController.text,
+    );
+    if (text != null) {
+      _odometerController.text = text;
+    }
+  }
+
+  void _onUseOdometerChanged(bool value) {
+    _form.setUseOdometer(value);
+    if (value) {
+      _loadBaseline(fillAbsoluteField: true);
+    }
+  }
+
+  void _onOdometerInputModeChanged(ReminderOdometerInputMode mode) {
+    _form.setOdometerInputMode(mode);
+    final text = ReminderOdometerPrefill.absoluteFieldText(
+      baselineKm: _form.baselineOdometerKm,
+      mode: mode,
+      distanceUnit: widget.distanceUnit,
+      currentText: _odometerController.text,
+    );
+    if (text != null) {
+      _odometerController.text = text;
     }
   }
 
@@ -153,8 +209,11 @@ class _MaintenanceReminderFormPageState
                   remindBeforeDaysError: _form.remindBeforeDaysError,
                   remindBeforeKmError: _form.remindBeforeKmError,
                   onUseDateChanged: _form.setUseDate,
-                  onUseOdometerChanged: _form.setUseOdometer,
+                  onUseOdometerChanged: _onUseOdometerChanged,
                   onPickDate: _pickDate,
+                  odometerInputMode: _form.odometerInputMode,
+                  onOdometerInputModeChanged: _onOdometerInputModeChanged,
+                  baselineOdometerKm: _form.baselineOdometerKm,
                   sectionGap: _sectionGap,
                 ),
                 const SizedBox(height: _sectionGap),

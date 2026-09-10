@@ -87,8 +87,8 @@ MaintenancePartPrepareResult prepareMaintenancePartLine({
 }
 
 /// Units load + field errors for [MaintenancePartFormPage].
-class MaintenancePartDialogNotifier extends ChangeNotifier {
-  MaintenancePartDialogNotifier({
+class MaintenancePartFormNotifier extends ChangeNotifier {
+  MaintenancePartFormNotifier({
     required this.nextLocalId,
     this.existing,
   }) : _unitId = existing?.unitId;

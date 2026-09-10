@@ -6,7 +6,9 @@ import '../../../../core/units.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/presentation/delete_confirm_dialog.dart';
 import '../../../../shared/presentation/form_actions_bar.dart';
+import '../../../../shared/presentation/reminder_odometer_prefill.dart';
 import '../../../../shared/presentation/reminder_trigger_fields.dart';
+import '../../../../shared/presentation/reminder_trigger_form.dart';
 import '../../../../app/di/app_providers.dart';
 import '../../../cars/domain/entities/car.dart';
 import '../../domain/entities/reminder.dart';
@@ -75,6 +77,61 @@ class _ReminderFormPageState extends ConsumerState<ReminderFormPage> {
       if (selected != null) {
         _form.setCarId(selected.id);
       }
+    }
+
+    await _loadBaseline();
+  }
+
+  Future<void> _loadBaseline({bool fillAbsoluteField = false}) async {
+    final carId = _form.carId;
+    if (carId == null) return;
+    final baselineKm = await ReminderOdometerPrefill.resolveBaselineKm(
+      odometer: ref.read(odometerRepositoryProvider),
+      carId: carId,
+      distanceUnit: _form.distanceUnit,
+    );
+    if (!mounted) return;
+    _form.setBaselineOdometerKm(baselineKm);
+    if (!fillAbsoluteField) return;
+    final text = ReminderOdometerPrefill.absoluteFieldText(
+      baselineKm: baselineKm,
+      mode: _form.odometerInputMode,
+      distanceUnit: _form.distanceUnit,
+      currentText: _odometerController.text,
+    );
+    if (text != null) {
+      _odometerController.text = text;
+    }
+  }
+
+  void _onCarIdChanged(int? id) {
+    _form.setCarId(id);
+    if (widget.existing != null) return;
+    _odometerController.clear();
+    _remindBeforeKmController.clear();
+    _form.setBaselineOdometerKm(null);
+    _form.setOdometerInputMode(ReminderOdometerInputMode.after);
+    _form.setUseOdometer(false);
+    _loadBaseline();
+  }
+
+  void _onUseOdometerChanged(bool value) {
+    _form.setUseOdometer(value);
+    if (value) {
+      _loadBaseline(fillAbsoluteField: true);
+    }
+  }
+
+  void _onOdometerInputModeChanged(ReminderOdometerInputMode mode) {
+    _form.setOdometerInputMode(mode);
+    final text = ReminderOdometerPrefill.absoluteFieldText(
+      baselineKm: _form.baselineOdometerKm,
+      mode: mode,
+      distanceUnit: _form.distanceUnit,
+      currentText: _odometerController.text,
+    );
+    if (text != null) {
+      _odometerController.text = text;
     }
   }
 
@@ -184,7 +241,7 @@ class _ReminderFormPageState extends ConsumerState<ReminderFormPage> {
                             label: item.displayTitle,
                           ),
                       ],
-                      onSelected: _form.setCarId,
+                      onSelected: _onCarIdChanged,
                     );
                   },
                 ),
@@ -202,8 +259,11 @@ class _ReminderFormPageState extends ConsumerState<ReminderFormPage> {
                   remindBeforeDaysError: _form.remindBeforeDaysError,
                   remindBeforeKmError: _form.remindBeforeKmError,
                   onUseDateChanged: _form.setUseDate,
-                  onUseOdometerChanged: _form.setUseOdometer,
+                  onUseOdometerChanged: _onUseOdometerChanged,
                   onPickDate: _pickDate,
+                  odometerInputMode: _form.odometerInputMode,
+                  onOdometerInputModeChanged: _onOdometerInputModeChanged,
+                  baselineOdometerKm: _form.baselineOdometerKm,
                   sectionGap: _sectionGap,
                 ),
                 const SizedBox(height: _sectionGap),

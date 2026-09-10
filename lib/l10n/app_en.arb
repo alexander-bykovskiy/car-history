@@ -860,6 +860,51 @@
   "@reminderByOdometer": {
     "description": "Toggle to enable odometer-based reminder"
   },
+  "reminderOdometerModeAfter": "After distance",
+  "@reminderOdometerModeAfter": {
+    "description": "Odometer input mode: add distance to current reading"
+  },
+  "reminderOdometerModeAbsolute": "Exact reading",
+  "@reminderOdometerModeAbsolute": {
+    "description": "Odometer input mode: enter absolute target reading"
+  },
+  "reminderOdometerAfterLabel": "After ({unit})",
+  "@reminderOdometerAfterLabel": {
+    "description": "Label for relative odometer offset field",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderOdometerDuePreview": "Due at {value} {unit}",
+  "@reminderOdometerDuePreview": {
+    "description": "Preview of absolute due odometer from relative offset",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderOdometerCurrentReading": "Current: {value} {unit}",
+  "@reminderOdometerCurrentReading": {
+    "description": "Shows baseline odometer when relative offset is empty",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderOdometerBaselineMissing": "No current odometer reading for this car",
+  "@reminderOdometerBaselineMissing": {
+    "description": "Shown when relative odometer mode has no baseline"
+  },
   "reminderDueDateLabel": "Due date",
   "@reminderDueDateLabel": {
     "description": "Label for reminder due date field"

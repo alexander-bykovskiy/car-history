@@ -85,5 +85,58 @@ void main() {
         ReminderTriggerErrorCode.odometerInvalid,
       );
     });
+
+    test('accepts relative odometer offset from baseline', () {
+      final result = prepareReminderTrigger(
+        distanceUnit: DistanceUnit.kilometers,
+        useDate: false,
+        useOdometer: true,
+        dueAt: null,
+        remindBeforeDaysText: '',
+        odometerText: '9000',
+        remindBeforeKmText: '',
+        odometerInputMode: ReminderOdometerInputMode.after,
+        baselineOdometerKm: 180572,
+      );
+      expect(result.isValid, isTrue);
+      expect(result.values!.dueOdometerKm, 189572);
+    });
+
+    test('rejects relative odometer without baseline', () {
+      final result = prepareReminderTrigger(
+        distanceUnit: DistanceUnit.kilometers,
+        useDate: false,
+        useOdometer: true,
+        dueAt: null,
+        remindBeforeDaysText: '',
+        odometerText: '9000',
+        remindBeforeKmText: '',
+        odometerInputMode: ReminderOdometerInputMode.after,
+      );
+      expect(result.isValid, isFalse);
+      expect(
+        result.errors!.odometerError,
+        ReminderTriggerErrorCode.odometerBaselineMissing,
+      );
+    });
+
+    test('rejects non-positive relative odometer offset', () {
+      final result = prepareReminderTrigger(
+        distanceUnit: DistanceUnit.kilometers,
+        useDate: false,
+        useOdometer: true,
+        dueAt: null,
+        remindBeforeDaysText: '',
+        odometerText: '0',
+        remindBeforeKmText: '',
+        odometerInputMode: ReminderOdometerInputMode.after,
+        baselineOdometerKm: 1000,
+      );
+      expect(result.isValid, isFalse);
+      expect(
+        result.errors!.odometerError,
+        ReminderTriggerErrorCode.odometerInvalid,
+      );
+    });
   });
 }

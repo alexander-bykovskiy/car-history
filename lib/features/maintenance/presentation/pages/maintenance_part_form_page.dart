@@ -10,7 +10,7 @@ import '../../../catalog/presentation/widgets/part_autocomplete_field.dart';
 import '../../../settings/di/preferences_providers.dart';
 import '../../di/maintenance_providers.dart';
 import '../../domain/usecases/save_maintenance.dart';
-import '../controllers/maintenance_part_dialog_notifier.dart';
+import '../controllers/maintenance_part_form_notifier.dart';
 import '../maintenance_failure_messages.dart';
 import '../models/draft_part_line.dart';
 
@@ -36,7 +36,7 @@ class MaintenancePartFormPage extends ConsumerStatefulWidget {
 
 class _MaintenancePartFormPageState
     extends ConsumerState<MaintenancePartFormPage> {
-  late final MaintenancePartDialogNotifier _form;
+  late final MaintenancePartFormNotifier _form;
   late final TextEditingController _nameController;
   late final TextEditingController _quantityController;
   late final TextEditingController _amountController;
@@ -48,7 +48,7 @@ class _MaintenancePartFormPageState
   void initState() {
     super.initState();
     final existing = widget.existing;
-    _form = MaintenancePartDialogNotifier(
+    _form = MaintenancePartFormNotifier(
       nextLocalId: widget.nextLocalId,
       existing: existing,
     );

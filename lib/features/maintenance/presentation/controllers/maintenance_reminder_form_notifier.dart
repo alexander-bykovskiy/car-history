@@ -48,6 +48,9 @@ class MaintenanceReminderFormNotifier extends ChangeNotifier {
   DateTime? get dueAt => _trigger.dueAt;
   bool get useDate => _trigger.useDate;
   bool get useOdometer => _trigger.useOdometer;
+  ReminderOdometerInputMode get odometerInputMode =>
+      _trigger.odometerInputMode;
+  double? get baselineOdometerKm => _trigger.baselineOdometerKm;
   bool get isEditing => _initial != null;
   ReminderDraft? get initial => _initial;
 
@@ -70,6 +73,16 @@ class MaintenanceReminderFormNotifier extends ChangeNotifier {
 
   void setUseOdometer(bool value) {
     _trigger.setUseOdometer(value);
+    notifyListeners();
+  }
+
+  void setOdometerInputMode(ReminderOdometerInputMode value) {
+    _trigger.setOdometerInputMode(value);
+    notifyListeners();
+  }
+
+  void setBaselineOdometerKm(double? value) {
+    _trigger.setBaselineOdometerKm(value);
     notifyListeners();
   }
 

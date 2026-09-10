@@ -14,11 +14,15 @@ class MaintenanceReminderSection extends StatelessWidget {
   const MaintenanceReminderSection({
     required this.form,
     required this.distanceUnit,
+    this.odometerText,
     super.key,
   });
 
   final MaintenanceFormNotifier form;
   final DistanceUnit distanceUnit;
+
+  /// Current odometer field from the maintenance form (display units).
+  final String? odometerText;
 
   String _reminderSummary(
     AppLocalizations l10n,
@@ -43,8 +47,11 @@ class MaintenanceReminderSection extends StatelessWidget {
         await Navigator.of(context).push<MaintenanceReminderFormResult>(
       MaterialPageRoute(
         builder: (context) => MaintenanceReminderFormPage(
+          carId: form.carId,
           distanceUnit: distanceUnit,
           initial: form.reminderDraft,
+          prefillOdometerText:
+              form.reminderDraft == null ? odometerText : null,
         ),
       ),
     );

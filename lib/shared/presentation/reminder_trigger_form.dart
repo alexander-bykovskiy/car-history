@@ -3,6 +3,15 @@ import '../../core/reminder_trigger_write_validation.dart';
 import '../../core/units.dart';
 import '../../l10n/app_localizations.dart';
 
+/// How the user enters the odometer due value in the form.
+enum ReminderOdometerInputMode {
+  /// Absolute target reading (stored as-is after unit conversion).
+  absolute,
+
+  /// Distance to add to the car's current/baseline odometer.
+  after,
+}
+
 /// Parsed reminder trigger fields after form validation.
 class ReminderTriggerValues {
   const ReminderTriggerValues({
@@ -24,6 +33,7 @@ enum ReminderTriggerErrorCode {
   remindBeforeInvalid,
   odometerRequired,
   odometerInvalid,
+  odometerBaselineMissing,
   triggerRequired,
   carRequired,
 }
@@ -60,6 +70,8 @@ String? reminderTriggerErrorText(
       l10n.reminderRemindBeforeInvalid,
     ReminderTriggerErrorCode.odometerRequired => l10n.reminderOdometerRequired,
     ReminderTriggerErrorCode.odometerInvalid => l10n.fuelingOdometerInvalid,
+    ReminderTriggerErrorCode.odometerBaselineMissing =>
+      l10n.reminderOdometerBaselineMissing,
     ReminderTriggerErrorCode.triggerRequired => l10n.reminderTriggerRequired,
     ReminderTriggerErrorCode.carRequired => l10n.reminderCarRequired,
     null => null,
@@ -88,6 +100,9 @@ ReminderTriggerPrepareResult prepareReminderTrigger({
   required String remindBeforeDaysText,
   required String odometerText,
   required String remindBeforeKmText,
+  ReminderOdometerInputMode odometerInputMode =
+      ReminderOdometerInputMode.absolute,
+  double? baselineOdometerKm,
 }) {
   DateTime? parsedDueAt;
   double? dueOdometerKm;
@@ -123,14 +138,35 @@ ReminderTriggerPrepareResult prepareReminderTrigger({
         ),
       );
     }
-    if (raw < 0) {
-      return const ReminderTriggerPrepareResult.invalid(
-        ReminderTriggerFieldErrors(
-          odometerError: ReminderTriggerErrorCode.odometerInvalid,
-        ),
-      );
+
+    switch (odometerInputMode) {
+      case ReminderOdometerInputMode.absolute:
+        if (raw < 0) {
+          return const ReminderTriggerPrepareResult.invalid(
+            ReminderTriggerFieldErrors(
+              odometerError: ReminderTriggerErrorCode.odometerInvalid,
+            ),
+          );
+        }
+        dueOdometerKm = distanceUnit.toKilometers(raw);
+      case ReminderOdometerInputMode.after:
+        if (raw <= 0) {
+          return const ReminderTriggerPrepareResult.invalid(
+            ReminderTriggerFieldErrors(
+              odometerError: ReminderTriggerErrorCode.odometerInvalid,
+            ),
+          );
+        }
+        final baseline = baselineOdometerKm;
+        if (baseline == null) {
+          return const ReminderTriggerPrepareResult.invalid(
+            ReminderTriggerFieldErrors(
+              odometerError: ReminderTriggerErrorCode.odometerBaselineMissing,
+            ),
+          );
+        }
+        dueOdometerKm = baseline + distanceUnit.toKilometers(raw);
     }
-    dueOdometerKm = distanceUnit.toKilometers(raw);
 
     final beforeRaw = parseFlexibleDouble(remindBeforeKmText);
     if (remindBeforeKmText.trim().isNotEmpty && beforeRaw == null) {

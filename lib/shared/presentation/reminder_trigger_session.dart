@@ -10,9 +10,24 @@ class ReminderTriggerSession {
     DateTime? dueAt,
     required bool useDate,
     required bool useOdometer,
-  }) : this._(dueAt, useDate, useOdometer);
+    ReminderOdometerInputMode odometerInputMode =
+        ReminderOdometerInputMode.absolute,
+    double? baselineOdometerKm,
+  }) : this._(
+          dueAt,
+          useDate,
+          useOdometer,
+          odometerInputMode,
+          baselineOdometerKm,
+        );
 
-  ReminderTriggerSession._(this._dueAt, this._useDate, this._useOdometer);
+  ReminderTriggerSession._(
+    this._dueAt,
+    this._useDate,
+    this._useOdometer,
+    this._odometerInputMode,
+    this._baselineOdometerKm,
+  );
 
   /// Seeds toggles from an existing record/draft ([isNew] = creating fresh).
   factory ReminderTriggerSession.fromExisting({
@@ -24,12 +39,18 @@ class ReminderTriggerSession {
       dueAt: dueAt ?? (isNew ? DateTime.now() : null),
       useDate: isNew ? true : dueAt != null,
       useOdometer: dueOdometerKm != null,
+      // New reminders default to "after N units" (UI-only); edits keep absolute.
+      odometerInputMode: isNew
+          ? ReminderOdometerInputMode.after
+          : ReminderOdometerInputMode.absolute,
     );
   }
 
   DateTime? _dueAt;
   bool _useDate;
   bool _useOdometer;
+  ReminderOdometerInputMode _odometerInputMode;
+  double? _baselineOdometerKm;
 
   ReminderTriggerErrorCode? _triggerError;
   ReminderTriggerErrorCode? _odometerError;
@@ -39,6 +60,8 @@ class ReminderTriggerSession {
   DateTime? get dueAt => _dueAt;
   bool get useDate => _useDate;
   bool get useOdometer => _useOdometer;
+  ReminderOdometerInputMode get odometerInputMode => _odometerInputMode;
+  double? get baselineOdometerKm => _baselineOdometerKm;
 
   ReminderTriggerErrorCode? get triggerError => _triggerError;
   ReminderTriggerErrorCode? get odometerError => _odometerError;
@@ -60,6 +83,14 @@ class ReminderTriggerSession {
 
   void setUseOdometer(bool value) {
     _useOdometer = value;
+  }
+
+  void setOdometerInputMode(ReminderOdometerInputMode value) {
+    _odometerInputMode = value;
+  }
+
+  void setBaselineOdometerKm(double? value) {
+    _baselineOdometerKm = value;
   }
 
   void clearErrors() {
@@ -101,6 +132,8 @@ class ReminderTriggerSession {
       remindBeforeDaysText: remindBeforeDaysText,
       odometerText: odometerText,
       remindBeforeKmText: remindBeforeKmText,
+      odometerInputMode: _odometerInputMode,
+      baselineOdometerKm: _baselineOdometerKm,
     );
   }
 }

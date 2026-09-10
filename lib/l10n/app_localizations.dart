@@ -1314,6 +1314,42 @@ abstract class AppLocalizations {
   /// **'By odometer'**
   String get reminderByOdometer;
 
+  /// Odometer input mode: add distance to current reading
+  ///
+  /// In en, this message translates to:
+  /// **'After distance'**
+  String get reminderOdometerModeAfter;
+
+  /// Odometer input mode: enter absolute target reading
+  ///
+  /// In en, this message translates to:
+  /// **'Exact reading'**
+  String get reminderOdometerModeAbsolute;
+
+  /// Label for relative odometer offset field
+  ///
+  /// In en, this message translates to:
+  /// **'After ({unit})'**
+  String reminderOdometerAfterLabel(String unit);
+
+  /// Preview of absolute due odometer from relative offset
+  ///
+  /// In en, this message translates to:
+  /// **'Due at {value} {unit}'**
+  String reminderOdometerDuePreview(String value, String unit);
+
+  /// Shows baseline odometer when relative offset is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Current: {value} {unit}'**
+  String reminderOdometerCurrentReading(String value, String unit);
+
+  /// Shown when relative odometer mode has no baseline
+  ///
+  /// In en, this message translates to:
+  /// **'No current odometer reading for this car'**
+  String get reminderOdometerBaselineMissing;
+
   /// Label for reminder due date field
   ///
   /// In en, this message translates to:

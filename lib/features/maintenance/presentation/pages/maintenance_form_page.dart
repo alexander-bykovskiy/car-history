@@ -235,6 +235,7 @@ class _MaintenanceFormPageState extends ConsumerState<MaintenanceFormPage> {
                 MaintenanceReminderSection(
                   form: _form,
                   distanceUnit: widget.distanceUnit,
+                  odometerText: _odometerController.text,
                 ),
                 const SizedBox(height: 24),
                 FormActionsBar(

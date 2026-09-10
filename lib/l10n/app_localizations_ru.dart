@@ -650,6 +650,31 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reminderByOdometer => 'По пробегу';
 
   @override
+  String get reminderOdometerModeAfter => 'Через';
+
+  @override
+  String get reminderOdometerModeAbsolute => 'Точный пробег';
+
+  @override
+  String reminderOdometerAfterLabel(String unit) {
+    return 'Через ($unit)';
+  }
+
+  @override
+  String reminderOdometerDuePreview(String value, String unit) {
+    return 'Срок: $value $unit';
+  }
+
+  @override
+  String reminderOdometerCurrentReading(String value, String unit) {
+    return 'Сейчас: $value $unit';
+  }
+
+  @override
+  String get reminderOdometerBaselineMissing =>
+      'Нет текущего пробега для этой машины';
+
+  @override
   String get reminderDueDateLabel => 'Дата события';
 
   @override

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/number_formatting.dart';
+import '../../core/number_parsing.dart';
 import '../../core/units.dart';
 import '../../l10n/app_localizations.dart';
 import 'date_form_field.dart';
@@ -28,6 +30,9 @@ class ReminderTriggerFields extends StatelessWidget {
     required this.onUseDateChanged,
     required this.onUseOdometerChanged,
     required this.onPickDate,
+    required this.odometerInputMode,
+    required this.onOdometerInputModeChanged,
+    this.baselineOdometerKm,
     this.sectionGap = 24,
     super.key,
   });
@@ -46,11 +51,15 @@ class ReminderTriggerFields extends StatelessWidget {
   final ValueChanged<bool> onUseDateChanged;
   final ValueChanged<bool> onUseOdometerChanged;
   final VoidCallback onPickDate;
+  final ReminderOdometerInputMode odometerInputMode;
+  final ValueChanged<ReminderOdometerInputMode> onOdometerInputModeChanged;
+  final double? baselineOdometerKm;
   final double sectionGap;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
     final locale = Localizations.localeOf(context).toString();
     final dateText = dueAt == null
         ? l10n.reminderDateHint
@@ -112,15 +121,79 @@ class ReminderTriggerFields extends StatelessWidget {
         ),
         if (useOdometer) ...[
           const SizedBox(height: 8),
+          SegmentedButton<ReminderOdometerInputMode>(
+            showSelectedIcon: false,
+            style: SegmentedButton.styleFrom(
+              selectedForegroundColor: theme.colorScheme.onPrimary,
+              foregroundColor: theme.colorScheme.onSurface,
+            ),
+            segments: [
+              ButtonSegment(
+                value: ReminderOdometerInputMode.after,
+                label: Text(l10n.reminderOdometerModeAfter),
+              ),
+              ButtonSegment(
+                value: ReminderOdometerInputMode.absolute,
+                label: Text(l10n.reminderOdometerModeAbsolute),
+              ),
+            ],
+            selected: {odometerInputMode},
+            onSelectionChanged: (selection) {
+              final mode = selection.first;
+              odometerController.clear();
+              onOdometerInputModeChanged(mode);
+            },
+          ),
+          const SizedBox(height: 16),
           TextField(
             controller: odometerController,
             decoration: InputDecoration(
-              labelText: l10n.fuelingOdometerLabel(unitShort),
+              labelText: odometerInputMode == ReminderOdometerInputMode.after
+                  ? l10n.reminderOdometerAfterLabel(unitShort)
+                  : l10n.fuelingOdometerLabel(unitShort),
               errorText: reminderTriggerErrorText(l10n, odometerError),
               border: const OutlineInputBorder(),
             ),
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
           ),
+          if (odometerInputMode == ReminderOdometerInputMode.after) ...[
+            const SizedBox(height: 8),
+            ListenableBuilder(
+              listenable: odometerController,
+              builder: (context, _) {
+                final baseline = baselineOdometerKm;
+                if (baseline == null) {
+                  return Text(
+                    l10n.reminderOdometerBaselineMissing,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                  );
+                }
+                final offset = parseFlexibleDouble(odometerController.text);
+                final dueKm = offset != null && offset > 0
+                    ? baseline + distanceUnit.toKilometers(offset)
+                    : baseline;
+                final dueDisplay = formatFlexibleDouble(
+                  distanceUnit.fromKilometers(dueKm),
+                );
+                final baselineDisplay = formatFlexibleDouble(
+                  distanceUnit.fromKilometers(baseline),
+                );
+                return Text(
+                  offset != null && offset > 0
+                      ? l10n.reminderOdometerDuePreview(dueDisplay, unitShort)
+                      : l10n.reminderOdometerCurrentReading(
+                          baselineDisplay,
+                          unitShort,
+                        ),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                );
+              },
+            ),
+          ],
           const SizedBox(height: 16),
           TextField(
             controller: remindBeforeKmController,

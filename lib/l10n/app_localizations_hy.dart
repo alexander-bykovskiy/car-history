@@ -657,6 +657,31 @@ class AppLocalizationsHy extends AppLocalizations {
   String get reminderByOdometer => 'Ըստ օդոմետրի';
 
   @override
+  String get reminderOdometerModeAfter => 'Հետո';
+
+  @override
+  String get reminderOdometerModeAbsolute => 'Ճշգրիտ ցուցում';
+
+  @override
+  String reminderOdometerAfterLabel(String unit) {
+    return 'Հետո ($unit)';
+  }
+
+  @override
+  String reminderOdometerDuePreview(String value, String unit) {
+    return 'Ժամկետ՝ $value $unit';
+  }
+
+  @override
+  String reminderOdometerCurrentReading(String value, String unit) {
+    return 'Ներկա՝ $value $unit';
+  }
+
+  @override
+  String get reminderOdometerBaselineMissing =>
+      'Այս մեքենայի համար ընթացիկ օդոմետրի ցուցում չկա';
+
+  @override
   String get reminderDueDateLabel => 'Վերջնաժամկետ';
 
   @override

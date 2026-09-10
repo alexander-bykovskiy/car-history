@@ -655,6 +655,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reminderByOdometer => 'By odometer';
 
   @override
+  String get reminderOdometerModeAfter => 'After distance';
+
+  @override
+  String get reminderOdometerModeAbsolute => 'Exact reading';
+
+  @override
+  String reminderOdometerAfterLabel(String unit) {
+    return 'After ($unit)';
+  }
+
+  @override
+  String reminderOdometerDuePreview(String value, String unit) {
+    return 'Due at $value $unit';
+  }
+
+  @override
+  String reminderOdometerCurrentReading(String value, String unit) {
+    return 'Current: $value $unit';
+  }
+
+  @override
+  String get reminderOdometerBaselineMissing =>
+      'No current odometer reading for this car';
+
+  @override
   String get reminderDueDateLabel => 'Due date';
 
   @override
