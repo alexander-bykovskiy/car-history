@@ -59,7 +59,7 @@ void main() {
       BackupKeys.fuelTypeCars: fuelTypeCars,
       BackupKeys.parts: parts,
       BackupKeys.partCars: partCars,
-      BackupKeys.partUnits: [],
+      BackupKeys.partUnits: <Map<String, dynamic>>[],
       BackupKeys.services: services,
       BackupKeys.serviceCenters: serviceCenters,
       BackupKeys.gasStationChains: gasStationChains,

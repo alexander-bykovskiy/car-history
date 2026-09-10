@@ -135,7 +135,7 @@ class _NamedCatalogCarBindDialogState
         appliesToAll: _appliesToAll,
       );
       if (!mounted) return;
-      final ok = await submitCatalogDialogSave(
+      final ok = await submitCatalogDialogSave<NamedCatalogItem>(
         context: context,
         save: () async => (
           result: outcome.result,
@@ -150,7 +150,7 @@ class _NamedCatalogCarBindDialogState
           if (mounted) setState(() => _errorText = message);
         },
         onRestore: (restorable) => widget.onRestore(
-          restorable as NamedCatalogItem,
+          restorable,
           carIds: _selectedCarIds.toList(),
           appliesToAll: _appliesToAll,
         ),

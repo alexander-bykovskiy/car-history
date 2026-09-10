@@ -219,7 +219,7 @@ Future<bool> _submitServiceName(
   required ValueChanged<String> onError,
 }) {
   final l10n = AppLocalizations.of(context);
-  return submitCatalogDialogSave(
+  return submitCatalogDialogSave<ServiceCatalogItem>(
     context: context,
     save: () async {
       final save = ref.read(saveServiceUseCaseProvider);
@@ -235,7 +235,7 @@ Future<bool> _submitServiceName(
     ),
     onError: onError,
     onRestore: (restorable) => ref.read(restoreServiceUseCaseProvider)(
-      restorable as ServiceCatalogItem,
+      restorable,
       name: name,
       iconKey: iconKey,
     ),

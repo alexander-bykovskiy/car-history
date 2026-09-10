@@ -68,7 +68,7 @@ class OdometerRepositoryImpl implements OdometerRepository {
     required String table,
     required int carId,
     required int? excludingId,
-    required Set<TableInfo> readsFrom,
+    required Set<TableInfo<Table, Object?>> readsFrom,
   }) async {
     final sql = excludingId == null
         ? 'SELECT MAX(odometer_km) AS m FROM $table '

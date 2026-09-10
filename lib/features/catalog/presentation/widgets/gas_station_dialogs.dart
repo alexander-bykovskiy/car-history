@@ -238,7 +238,7 @@ Future<bool> _submitLocation(
     return false;
   }
 
-  return submitCatalogDialogSave(
+  return submitCatalogDialogSave<GasStationLocationItem>(
     context: context,
     save: () async {
       final save = ref.read(saveGasStationLocationUseCaseProvider);
@@ -255,7 +255,7 @@ Future<bool> _submitLocation(
     onError: onError,
     onRestore: (restorable) =>
         ref.read(restoreGasStationLocationUseCaseProvider)(
-      restorable as GasStationLocationItem,
+      restorable,
       address: trimmed,
     ),
   );

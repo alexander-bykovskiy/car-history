@@ -125,7 +125,7 @@ Future<bool> _submit(
   required ValueChanged<String> onError,
 }) {
   final l10n = AppLocalizations.of(context);
-  return submitCatalogDialogSave(
+  return submitCatalogDialogSave<PlaceCatalogItem>(
     context: context,
     save: () async {
       final save = ref.read(saveServiceCenterUseCaseProvider);
@@ -142,7 +142,7 @@ Future<bool> _submit(
     onError: onError,
     onRestore: (restorable) =>
         ref.read(restoreServiceCenterUseCaseProvider)(
-      restorable as PlaceCatalogItem,
+      restorable,
       address: address,
     ),
   );

@@ -24,7 +24,7 @@ class SelectedCarService {
 
       final carsSub = _cars.watchAll().listen(emit);
       final tickSub = _store.changes.listen((_) async {
-        emit(await _cars.listAll());
+        await emit(await _cars.listAll());
       });
 
       controller.onCancel = () async {

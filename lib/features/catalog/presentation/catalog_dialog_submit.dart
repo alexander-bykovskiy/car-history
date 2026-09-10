@@ -17,16 +17,16 @@ class CatalogSaveUiMessages {
 }
 
 /// Runs [save], checks [context.mounted], then [handleCatalogSaveResult].
-Future<bool> submitCatalogDialogSave({
+Future<bool> submitCatalogDialogSave<T>({
   required BuildContext context,
-  required Future<({CatalogSaveResult result, Object? restorable})> Function()
-      save,
+  required Future<({CatalogSaveResult result, T? restorable})> Function() save,
   required CatalogSaveUiMessages messages,
   required ValueChanged<String> onError,
-  required Future<void> Function(Object restorable) onRestore,
+  required Future<void> Function(T restorable) onRestore,
 }) async {
   final outcome = await save();
   if (!context.mounted) return false;
+  final restorable = outcome.restorable;
   return handleCatalogSaveResult(
     context: context,
     result: outcome.result,
@@ -34,8 +34,11 @@ Future<bool> submitCatalogDialogSave({
     alreadyExistsMessage: messages.alreadyExists,
     restoreConfirmMessage: messages.restoreConfirm,
     onError: onError,
-    hasRestorableItem: outcome.restorable != null,
-    onRestore: () => onRestore(outcome.restorable!),
+    hasRestorableItem: restorable != null,
+    onRestore: () async {
+      if (restorable == null) return;
+      await onRestore(restorable);
+    },
   );
 }
 

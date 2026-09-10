@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/presentation/dialog_actions.dart';
-import '../../domain/entities/catalog_save_result.dart';
+import '../../domain/entities/named_catalog_item.dart';
 import '../catalog_dialog_submit.dart';
 
 /// Shared name-only create/edit dialog for simple named catalogs.
-class NamedCatalogNameDialog extends ConsumerStatefulWidget {
+class NamedCatalogNameDialog<T> extends ConsumerStatefulWidget {
   const NamedCatalogNameDialog({
     required this.addTitle,
     required this.editTitle,
@@ -30,18 +30,18 @@ class NamedCatalogNameDialog extends ConsumerStatefulWidget {
   final String restoreConfirmMessage;
   final String initialName;
   final bool isEditing;
-  final Future<({CatalogSaveResult result, Object? restorable})> Function(
+  final Future<({CatalogSaveResult result, T? restorable})> Function(
     String name,
   ) onSave;
-  final Future<void> Function(Object restorable) onRestore;
+  final Future<void> Function(T restorable) onRestore;
 
   @override
-  ConsumerState<NamedCatalogNameDialog> createState() =>
-      _NamedCatalogNameDialogState();
+  ConsumerState<NamedCatalogNameDialog<T>> createState() =>
+      _NamedCatalogNameDialogState<T>();
 }
 
-class _NamedCatalogNameDialogState
-    extends ConsumerState<NamedCatalogNameDialog> {
+class _NamedCatalogNameDialogState<T>
+    extends ConsumerState<NamedCatalogNameDialog<T>> {
   late final TextEditingController _controller;
   String? _errorText;
   bool _saving = false;
@@ -62,7 +62,7 @@ class _NamedCatalogNameDialogState
     if (_saving) return;
     setState(() => _saving = true);
     try {
-      final ok = await submitCatalogDialogSave(
+      final ok = await submitCatalogDialogSave<T>(
         context: context,
         save: () => widget.onSave(_controller.text),
         messages: CatalogSaveUiMessages(
@@ -107,8 +107,8 @@ class _NamedCatalogNameDialogState
   }
 }
 
-/// Opens [NamedCatalogNameDialog] with l10n-backed titles for part units.
-Future<void> showNamedCatalogNameDialog({
+/// Opens [NamedCatalogNameDialog] with caller-supplied titles.
+Future<void> showNamedCatalogNameDialog<T>({
   required BuildContext context,
   required String addTitle,
   required String editTitle,
@@ -116,17 +116,17 @@ Future<void> showNamedCatalogNameDialog({
   required String emptyNameMessage,
   required String alreadyExistsMessage,
   required String restoreConfirmMessage,
-  required Future<({CatalogSaveResult result, Object? restorable})> Function(
+  required Future<({CatalogSaveResult result, T? restorable})> Function(
     String name,
   ) onSave,
-  required Future<void> Function(Object restorable) onRestore,
+  required Future<void> Function(T restorable) onRestore,
   String initialName = '',
   bool isEditing = false,
 }) {
   return showDialog<bool>(
     context: context,
     builder: (dialogContext) {
-      return NamedCatalogNameDialog(
+      return NamedCatalogNameDialog<T>(
         addTitle: addTitle,
         editTitle: editTitle,
         nameLabel: nameLabel,
@@ -146,14 +146,13 @@ Future<void> showNamedCatalogNameDialog({
 Future<void> showPartUnitNameDialog({
   required BuildContext context,
   required AppLocalizations l10n,
-  required Future<({CatalogSaveResult result, Object? restorable})> Function(
-    String name,
-  ) onSave,
-  required Future<void> Function(Object restorable) onRestore,
+  required Future<({CatalogSaveResult result, NamedCatalogItem? restorable})>
+      Function(String name) onSave,
+  required Future<void> Function(NamedCatalogItem restorable) onRestore,
   String initialName = '',
   bool isEditing = false,
 }) {
-  return showNamedCatalogNameDialog(
+  return showNamedCatalogNameDialog<NamedCatalogItem>(
     context: context,
     addTitle: l10n.partUnitAddTitle,
     editTitle: l10n.partUnitEditTitle,

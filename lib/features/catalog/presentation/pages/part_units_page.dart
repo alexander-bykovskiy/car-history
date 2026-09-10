@@ -30,7 +30,7 @@ class PartUnitsPage extends ConsumerWidget {
         return (result: outcome.result, restorable: outcome.item);
       },
       onRestore: (restorable) =>
-          ref.read(restorePartUnitUseCaseProvider)(restorable as NamedCatalogItem),
+          ref.read(restorePartUnitUseCaseProvider)(restorable),
     );
   }
 

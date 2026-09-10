@@ -27,10 +27,10 @@ void main() {
     for (final key in BackupKeys.rootSections) {
       expect(map.containsKey(key), isTrue, reason: 'missing root key $key');
     }
-    expect(map[BackupKeys.cars], isA<List>());
-    expect(map[BackupKeys.preferences], isA<Map>());
+    expect(map[BackupKeys.cars], isA<List<Object?>>());
+    expect(map[BackupKeys.preferences], isA<Map<Object?, Object?>>());
 
-    final prefs = map[BackupKeys.preferences]! as Map;
+    final prefs = map[BackupKeys.preferences]! as Map<Object?, Object?>;
     expect(prefs.containsKey(BackupKeys.fuelVolumeUnit), isTrue);
     expect(prefs.containsKey(BackupKeys.distanceUnit), isTrue);
     expect(prefs.containsKey(BackupKeys.currencyCode), isTrue);

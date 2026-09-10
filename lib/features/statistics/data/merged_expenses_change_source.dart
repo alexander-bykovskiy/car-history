@@ -19,27 +19,19 @@ class MergedExpensesChangeSource implements ExpensesChangeSource {
 
   @override
   Stream<void> watchExpensesChanged() {
-    late StreamController<void> controller;
-    StreamSubscription<void>? fuelSub;
-    StreamSubscription<void>? maintenanceSub;
+    return Stream.multi((controller) {
+      final fuelSub = fuelings.watchFuelingsChanges().listen((_) {
+        if (!controller.isClosed) controller.add(null);
+      });
+      final maintenanceSub =
+          maintenances.watchMaintenancesChanges().listen((_) {
+        if (!controller.isClosed) controller.add(null);
+      });
 
-    controller = StreamController<void>.broadcast(
-      onListen: () {
-        fuelSub = fuelings.watchFuelingsChanges().listen((_) {
-          if (!controller.isClosed) controller.add(null);
-        });
-        maintenanceSub = maintenances.watchMaintenancesChanges().listen((_) {
-          if (!controller.isClosed) controller.add(null);
-        });
-      },
-      onCancel: () async {
-        await fuelSub?.cancel();
-        await maintenanceSub?.cancel();
-        fuelSub = null;
-        maintenanceSub = null;
-      },
-    );
-
-    return controller.stream;
+      controller.onCancel = () async {
+        await fuelSub.cancel();
+        await maintenanceSub.cancel();
+      };
+    });
   }
 }
