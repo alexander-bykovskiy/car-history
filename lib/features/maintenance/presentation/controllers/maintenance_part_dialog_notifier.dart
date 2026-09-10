@@ -23,7 +23,7 @@ class MaintenancePartPrepareResult {
   bool get isReady => line != null;
 }
 
-/// Parses dialog fields into a [DraftPartLine].
+/// Parses part form fields into a [DraftPartLine].
 MaintenancePartPrepareResult prepareMaintenancePartLine({
   required String nameText,
   required String quantityText,
@@ -86,7 +86,7 @@ MaintenancePartPrepareResult prepareMaintenancePartLine({
   );
 }
 
-/// Units load + field errors for [MaintenancePartDialog].
+/// Units load + field errors for [MaintenancePartFormPage].
 class MaintenancePartDialogNotifier extends ChangeNotifier {
   MaintenancePartDialogNotifier({
     required this.nextLocalId,

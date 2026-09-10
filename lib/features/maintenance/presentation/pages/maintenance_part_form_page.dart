@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/number_formatting.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/presentation/decimal_input_formatters.dart';
-import '../../../../shared/presentation/dialog_actions.dart';
+import '../../../../shared/presentation/form_actions_bar.dart';
 import '../../../catalog/domain/entities/named_catalog_item.dart';
 import '../../../catalog/presentation/widgets/part_autocomplete_field.dart';
 import '../../../settings/di/preferences_providers.dart';
@@ -14,8 +14,9 @@ import '../controllers/maintenance_part_dialog_notifier.dart';
 import '../maintenance_failure_messages.dart';
 import '../models/draft_part_line.dart';
 
-class MaintenancePartDialog extends ConsumerStatefulWidget {
-  const MaintenancePartDialog({
+/// Full-screen form for adding/editing a maintenance part line.
+class MaintenancePartFormPage extends ConsumerStatefulWidget {
+  const MaintenancePartFormPage({
     required this.carId,
     required this.currencyCode,
     required this.nextLocalId,
@@ -29,11 +30,12 @@ class MaintenancePartDialog extends ConsumerStatefulWidget {
   final DraftPartLine? existing;
 
   @override
-  ConsumerState<MaintenancePartDialog> createState() =>
-      _MaintenancePartDialogState();
+  ConsumerState<MaintenancePartFormPage> createState() =>
+      _MaintenancePartFormPageState();
 }
 
-class _MaintenancePartDialogState extends ConsumerState<MaintenancePartDialog> {
+class _MaintenancePartFormPageState
+    extends ConsumerState<MaintenancePartFormPage> {
   late final MaintenancePartDialogNotifier _form;
   late final TextEditingController _nameController;
   late final TextEditingController _quantityController;
@@ -112,116 +114,106 @@ class _MaintenancePartDialogState extends ConsumerState<MaintenancePartDialog> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final existing = widget.existing;
-    final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(8));
 
-    return ListenableBuilder(
-      listenable: _form,
-      builder: (context, _) {
-        if (_form.unitsLoading) {
-          return AlertDialog(
-            shape: shape,
-            content: const SizedBox(
-              width: 360,
-              height: 96,
-              child: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          existing == null
+              ? l10n.maintenancePartAddTitle
+              : l10n.maintenancePartEditTitle,
+        ),
+      ),
+      body: SafeArea(
+        top: false,
+        child: ListenableBuilder(
+          listenable: _form,
+          builder: (context, _) {
+            if (_form.unitsLoading) {
+              return const Center(
                 child: SizedBox(
                   width: 28,
                   height: 28,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 ),
-              ),
-            ),
-          );
-        }
+              );
+            }
 
-        return AlertDialog(
-          shape: shape,
-          title: Text(
-            existing == null
-                ? l10n.maintenancePartAddTitle
-                : l10n.maintenancePartEditTitle,
-          ),
-          content: SizedBox(
-            width: 360,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  PartAutocompleteField(
-                    repository: ref.watch(partRepositoryProvider),
-                    carId: widget.carId,
-                    controller: _nameController,
-                    focusNode: _nameFocus,
-                    errorText: _mapError(_form.nameError, l10n),
-                    onChanged: (_) => _form.clearNameError(),
-                  ),
-                  const SizedBox(height: 16),
-                  _QuantityUnitRow(
-                    quantityController: _quantityController,
-                    quantityError: _mapError(_form.quantityError, l10n),
-                    onQuantityChanged: (_) => _form.clearQuantityError(),
-                    units: _form.units,
-                    unitId: _form.unitId,
-                    onUnitChanged: _form.setUnitId,
-                    unitLabel: l10n.maintenancePartUnitLabel,
-                    quantityLabel: l10n.maintenancePartQuantityLabel,
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: _amountController,
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: decimalNumberInputFormatters,
-                    decoration: InputDecoration(
-                      labelText: l10n.maintenancePartAmountLabel,
-                      errorText: _mapError(_form.amountError, l10n),
-                      border: const OutlineInputBorder(),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 12),
-                        child: Align(
-                          widthFactor: 1,
-                          alignment: Alignment.center,
-                          child: Text(
-                            widget.currencyCode,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                          ),
+            return ListView(
+              padding: const EdgeInsets.all(16),
+              children: [
+                PartAutocompleteField(
+                  repository: ref.watch(partRepositoryProvider),
+                  carId: widget.carId,
+                  controller: _nameController,
+                  focusNode: _nameFocus,
+                  errorText: _mapError(_form.nameError, l10n),
+                  onChanged: (_) => _form.clearNameError(),
+                ),
+                const SizedBox(height: 16),
+                _QuantityUnitRow(
+                  quantityController: _quantityController,
+                  quantityError: _mapError(_form.quantityError, l10n),
+                  onQuantityChanged: (_) => _form.clearQuantityError(),
+                  units: _form.units,
+                  unitId: _form.unitId,
+                  onUnitChanged: _form.setUnitId,
+                  unitLabel: l10n.maintenancePartUnitLabel,
+                  quantityLabel: l10n.maintenancePartQuantityLabel,
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _amountController,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  inputFormatters: decimalNumberInputFormatters,
+                  decoration: InputDecoration(
+                    labelText: l10n.maintenancePartAmountLabel,
+                    errorText: _mapError(_form.amountError, l10n),
+                    border: const OutlineInputBorder(),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: Align(
+                        widthFactor: 1,
+                        alignment: Alignment.center,
+                        child: Text(
+                          widget.currencyCode,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ),
                     ),
-                    textInputAction: TextInputAction.next,
-                    onChanged: (_) => _form.clearAmountError(),
                   ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: _commentController,
-                    minLines: 1,
-                    maxLines: 3,
-                    textCapitalization: TextCapitalization.sentences,
-                    decoration: InputDecoration(
-                      labelText: l10n.maintenancePartCommentLabel,
-                      border: const OutlineInputBorder(),
-                    ),
-                    textInputAction: TextInputAction.done,
-                    onSubmitted: (_) => _onSubmit(),
+                  textInputAction: TextInputAction.next,
+                  onChanged: (_) => _form.clearAmountError(),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _commentController,
+                  minLines: 1,
+                  maxLines: 3,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: InputDecoration(
+                    labelText: l10n.maintenancePartCommentLabel,
+                    border: const OutlineInputBorder(),
                   ),
-                ],
-              ),
-            ),
-          ),
-          actions: DialogActions.cancelConfirm(
-            context: context,
-            onCancel: () => Navigator.of(context).pop(),
-            onConfirm: _onSubmit,
-          ),
-        );
-      },
+                  textInputAction: TextInputAction.done,
+                  onSubmitted: (_) => _onSubmit(),
+                ),
+                const SizedBox(height: 24),
+                FormActionsBar(
+                  isSaving: false,
+                  onSave: _onSubmit,
+                ),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 }

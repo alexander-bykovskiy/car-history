@@ -7,7 +7,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/presentation/delete_confirm_dialog.dart';
 import '../controllers/maintenance_form_notifier.dart';
 import '../models/draft_part_line.dart';
-import 'maintenance_part_dialog.dart';
+import '../pages/maintenance_part_form_page.dart';
 
 class MaintenancePartsSection extends ConsumerWidget {
   const MaintenancePartsSection({
@@ -19,20 +19,19 @@ class MaintenancePartsSection extends ConsumerWidget {
   final MaintenanceFormNotifier form;
   final String totalText;
 
-  Future<void> _openPartDialog(
+  Future<void> _openPartForm(
     BuildContext context, {
     DraftPartLine? existing,
   }) async {
-    final result = await showDialog<DraftPartLine>(
-      context: context,
-      builder: (dialogContext) {
-        return MaintenancePartDialog(
+    final result = await Navigator.of(context).push<DraftPartLine>(
+      MaterialPageRoute(
+        builder: (context) => MaintenancePartFormPage(
           carId: form.carId,
           currencyCode: form.currencyCode,
           existing: existing,
           nextLocalId: form.nextPartLocalId,
-        );
-      },
+        ),
+      ),
     );
     if (result == null) return;
     form.upsertPart(result, replacing: existing);
@@ -131,7 +130,7 @@ class MaintenancePartsSection extends ConsumerWidget {
               ),
         onTap: form.saving
             ? null
-            : () => _openPartDialog(context, existing: line),
+            : () => _openPartForm(context, existing: line),
       ),
     );
   }
@@ -213,7 +212,7 @@ class MaintenancePartsSection extends ConsumerWidget {
           child: SizedBox(
             width: double.infinity,
             child: FilledButton.icon(
-              onPressed: form.saving ? null : () => _openPartDialog(context),
+              onPressed: form.saving ? null : () => _openPartForm(context),
               icon: const Icon(Icons.add, size: 18),
               label: Text(l10n.actionAdd),
               style: FilledButton.styleFrom(
