@@ -71,23 +71,46 @@ void main() {
       expect(form.titleError, ReminderFormTitleError.required);
     });
 
-    test('save resets saving flag when use case throws', () async {
+    test('save returns unexpected when use case throws', () async {
       final form = ReminderFormNotifier(
         existing: null,
         distanceUnit: DistanceUnit.kilometers,
         initialCarId: 1,
       );
 
-      await expectLater(
-        form.save(
-          titleText: 'Oil due',
-          remindBeforeDaysText: '',
-          odometerText: '',
-          remindBeforeKmText: '',
-          saveUseCase: SaveReminderUseCase(_ThrowingReminderRepository()),
-        ),
-        throwsStateError,
+      final outcome = await form.save(
+        titleText: 'Oil due',
+        remindBeforeDaysText: '',
+        odometerText: '',
+        remindBeforeKmText: '',
+        saveUseCase: SaveReminderUseCase(_ThrowingReminderRepository()),
       );
+
+      expect(outcome, isA<ReminderFormSubmitUnexpected>());
+      expect(form.saving, isFalse);
+    });
+
+    test('delete returns unexpected when repository throws', () async {
+      final form = ReminderFormNotifier(
+        existing: const ReminderRecord(
+          id: 42,
+          carId: 1,
+          title: 'Oil due',
+          dueAt: null,
+          dueOdometerKm: null,
+          remindBeforeDays: null,
+          remindBeforeKm: null,
+          isCompleted: false,
+          isDeleted: false,
+        ),
+        distanceUnit: DistanceUnit.kilometers,
+      );
+
+      final outcome = await form.delete(
+        DeleteReminderUseCase(_ThrowingReminderRepository()),
+      );
+
+      expect(outcome, isA<ReminderFormSubmitUnexpected>());
       expect(form.saving, isFalse);
     });
   });

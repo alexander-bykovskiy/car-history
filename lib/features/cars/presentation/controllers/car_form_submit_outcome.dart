@@ -32,6 +32,7 @@ sealed class CarFormSubmitOutcome {
   const factory CarFormSubmitOutcome.deleted() = CarFormSubmitDeleted;
   const factory CarFormSubmitOutcome.snack(CarFormSnack snack) =
       CarFormSubmitSnack;
+  const factory CarFormSubmitOutcome.unexpected() = CarFormSubmitUnexpected;
 }
 
 class CarFormSubmitSuccess extends CarFormSubmitOutcome {
@@ -53,6 +54,10 @@ class CarFormSubmitDeleted extends CarFormSubmitOutcome {
 class CarFormSubmitSnack extends CarFormSubmitOutcome {
   const CarFormSubmitSnack(this.snack);
   final CarFormSnack snack;
+}
+
+class CarFormSubmitUnexpected extends CarFormSubmitOutcome {
+  const CarFormSubmitUnexpected();
 }
 
 sealed class CarPhotoPickOutcome {

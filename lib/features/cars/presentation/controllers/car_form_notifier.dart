@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../../domain/car_write_validation.dart';
 import '../../domain/entities/car.dart';
 import '../../domain/usecases/car_write_usecases.dart';
+import '../../../../core/report_caught_error.dart';
 import '../../../../theme/car_theme_config.dart';
 import 'car_form_prepare.dart';
 import 'car_form_submit_outcome.dart';
@@ -122,6 +123,9 @@ class CarFormNotifier extends ChangeNotifier {
         case null:
           return const CarFormSubmitOutcome.success();
       }
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'CarFormNotifier.save');
+      return const CarFormSubmitOutcome.unexpected();
     } finally {
       _saving = false;
       notifyListeners();
@@ -146,6 +150,9 @@ class CarFormNotifier extends ChangeNotifier {
         );
       }
       return const CarFormSubmitOutcome.deleted();
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'CarFormNotifier.delete');
+      return const CarFormSubmitOutcome.unexpected();
     } finally {
       _saving = false;
       notifyListeners();

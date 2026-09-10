@@ -7,6 +7,7 @@ import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../../core/report_caught_error.dart';
 import 'backup_results.dart';
 
 /// Platform file dialogs and share sheet for backup JSON.
@@ -71,8 +72,9 @@ class BackupFileIo {
         if (tempFile != null && await tempFile.exists()) {
           await tempFile.delete();
         }
-      } catch (_) {
+      } catch (e, st) {
         // Best-effort cleanup; ignore secondary IO errors.
+        reportCaughtError(e, st, context: 'BackupFileIo.shareJsonTempCleanup');
       }
     }
   }

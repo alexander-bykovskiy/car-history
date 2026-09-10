@@ -166,8 +166,14 @@ class _ReminderFormPageState extends ConsumerState<ReminderFormPage> {
       saveUseCase: ref.read(saveReminderUseCaseProvider),
     );
     if (!mounted) return;
-    if (outcome is ReminderFormSubmitSuccess) {
-      Navigator.of(context).pop(true);
+    switch (outcome) {
+      case ReminderFormSubmitSuccess():
+        Navigator.of(context).pop(true);
+      case ReminderFormSubmitUnexpected():
+        showFormActionFailedSnack(context);
+      case ReminderFormSubmitFieldError():
+      case ReminderFormSubmitBusy():
+        break;
     }
   }
 
@@ -184,8 +190,14 @@ class _ReminderFormPageState extends ConsumerState<ReminderFormPage> {
     final outcome =
         await _form.delete(ref.read(deleteReminderUseCaseProvider));
     if (!mounted) return;
-    if (outcome is ReminderFormSubmitSuccess) {
-      Navigator.of(context).pop(true);
+    switch (outcome) {
+      case ReminderFormSubmitSuccess():
+        Navigator.of(context).pop(true);
+      case ReminderFormSubmitUnexpected():
+        showFormActionFailedSnack(context);
+      case ReminderFormSubmitFieldError():
+      case ReminderFormSubmitBusy():
+        break;
     }
   }
 

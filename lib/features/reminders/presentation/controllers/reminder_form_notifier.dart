@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../../../core/report_caught_error.dart';
 import '../../../../core/units.dart';
 import '../../../../shared/presentation/reminder_trigger_form.dart';
 import '../../../../shared/presentation/reminder_trigger_session.dart';
@@ -15,6 +16,8 @@ sealed class ReminderFormSubmitOutcome {
   const factory ReminderFormSubmitOutcome.busy() = ReminderFormSubmitBusy;
   const factory ReminderFormSubmitOutcome.fieldError() =
       ReminderFormSubmitFieldError;
+  const factory ReminderFormSubmitOutcome.unexpected() =
+      ReminderFormSubmitUnexpected;
 }
 
 class ReminderFormSubmitSuccess extends ReminderFormSubmitOutcome {
@@ -27,6 +30,10 @@ class ReminderFormSubmitBusy extends ReminderFormSubmitOutcome {
 
 class ReminderFormSubmitFieldError extends ReminderFormSubmitOutcome {
   const ReminderFormSubmitFieldError();
+}
+
+class ReminderFormSubmitUnexpected extends ReminderFormSubmitOutcome {
+  const ReminderFormSubmitUnexpected();
 }
 
 /// Page-scoped reminder form session. No [WidgetRef] — page passes use cases.
@@ -197,6 +204,9 @@ class ReminderFormNotifier extends ChangeNotifier {
           notifyListeners();
           return const ReminderFormSubmitOutcome.success();
       }
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'ReminderFormNotifier.save');
+      return const ReminderFormSubmitOutcome.unexpected();
     } finally {
       _saving = false;
       notifyListeners();
@@ -215,6 +225,9 @@ class ReminderFormNotifier extends ChangeNotifier {
     try {
       await deleteUseCase(record.id);
       return const ReminderFormSubmitOutcome.success();
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'ReminderFormNotifier.delete');
+      return const ReminderFormSubmitOutcome.unexpected();
     } finally {
       _saving = false;
       notifyListeners();

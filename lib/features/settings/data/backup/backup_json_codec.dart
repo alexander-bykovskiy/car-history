@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import '../../../../core/report_caught_error.dart';
+
 /// Pure JSON helpers for backup export/import (no DB / Flutter UI deps).
 abstract final class BackupJsonCodec {
   static String dt(DateTime value) => value.toUtc().toIso8601String();
@@ -70,7 +72,8 @@ abstract final class BackupJsonCodec {
     if (raw is! String || raw.isEmpty) return null;
     try {
       return Uint8List.fromList(base64Decode(raw));
-    } catch (_) {
+    } catch (e, st) {
+      reportCaughtError(e, st, context: 'BackupJsonCodec.decodePhoto');
       return null;
     }
   }

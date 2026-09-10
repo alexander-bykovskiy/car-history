@@ -106,6 +106,8 @@ class _CarFormPageState extends ConsumerState<CarFormPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(carFormSnackMessage(l10n, snack))),
         );
+      case CarFormSubmitUnexpected():
+        showFormActionFailedSnack(context);
       case CarFormSubmitFieldError():
       case CarFormSubmitBusy():
       case CarFormSubmitDeleted():
@@ -134,7 +136,11 @@ class _CarFormPageState extends ConsumerState<CarFormPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(carFormSnackMessage(l10n, snack))),
         );
-      default:
+      case CarFormSubmitUnexpected():
+        showFormActionFailedSnack(context);
+      case CarFormSubmitSuccess():
+      case CarFormSubmitFieldError():
+      case CarFormSubmitBusy():
         break;
     }
   }
