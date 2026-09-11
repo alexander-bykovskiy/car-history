@@ -4,7 +4,7 @@ homepage: https://github.com/alexander-bykovskiy/car-history
 repository: https://github.com/alexander-bykovskiy/car-history
 issue_tracker: https://github.com/alexander-bykovskiy/car-history/issues
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.2.0+2
 
 environment:
   sdk: ^3.12.2
